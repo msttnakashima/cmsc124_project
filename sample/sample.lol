@@ -19,9 +19,12 @@ HAI 1.2
       to NUMBR or NUMBAR if possible.
     you may comment the line below if you will use this program
       for your project
-  TLDR
+  TLDR 
+
+
   choice R MAEK choice A NUMBR
 
+OBTW
   I HAS A year
 
   IT R choice   BTW IT = choice
@@ -53,5 +56,6 @@ HAI 1.2
     NO WAI
       VISIBLE "goodbye!"
   OIC
+TLDR
 
 KTHXBYE

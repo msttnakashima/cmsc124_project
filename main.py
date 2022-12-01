@@ -3,7 +3,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import ttk
 from tkinter import messagebox
 from lexical import *
-from syntax import *
+from analyzer import *
 
 userInput = []
 terminalStrings = []

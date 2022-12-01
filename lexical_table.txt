@@ -2,139 +2,41 @@ LEXEME			CLASSIFICATION
 HAI       		Start of Program
 1.2       		NUMBAR Type Literal
 I HAS A   		Variable Declaration
-x         		Variable Identifier
+NUM       		Variable Identifier
+ITZ       		Variable Assignment
+2         		NUMBR Type Literal
+BTW       		Single-Line Comment Delimiter
+NUM = 2   		Comment Literal
 I HAS A   		Variable Declaration
-y         		Variable Identifier
+FLOT      		Variable Identifier
+ITZ       		Variable Assignment
+2.5       		NUMBAR Type Literal
+BTW       		Single-Line Comment Delimiter
+FLOT = 2.5 		Comment Literal
 I HAS A   		Variable Declaration
-answer    		Variable Identifier
+NAME      		Variable Identifier
+ITZ       		Variable Assignment
+"         		String Delimiter
+erika     		YARN Type Literal
+"         		String Delimiter
+BTW       		Single-Line Comment Delimiter
+NAME = "erika" 		Comment Literal
+BTW       		Single-Line Comment Delimiter
+printing values 		Comment Literal
 VISIBLE   		Output Keyword
-"         		String Delimiter
-x:        		Literal   
-"         		String Delimiter
-GIMMEH    		Input Keyword
-x         		Variable Identifier
+NUM       		Variable Identifier
 VISIBLE   		Output Keyword
-"         		String Delimiter
-y:        		Literal   
-"         		String Delimiter
-GIMMEH    		Input Keyword
-y         		Variable Identifier
-answer    		Variable Identifier
+FLOT      		Variable Identifier
+VISIBLE   		Output Keyword
+NAME      		Variable Identifier
+BTW       		Single-Line Comment Delimiter
+assignment statement: 		Comment Literal
+NUM       		Variable Identifier
 R         		Assignment Operation
-SUM OF    		Addition Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-x         		Variable Identifier
-"         		String Delimiter
-+         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-DIFF OF   		Subtraction Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-x         		Variable Identifier
-"         		String Delimiter
--         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-PRODUKT OF		Multiplication Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-x         		Variable Identifier
-"         		String Delimiter
-*         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-QUOSHUNT OF		Quotient Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-x         		Variable Identifier
-"         		String Delimiter
-/         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-MOD OF    		Modulo Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-x         		Variable Identifier
-"         		String Delimiter
-%         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-BIGGR OF  		Max Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
+17        		NUMBR Type Literal
 VISIBLE   		Output Keyword
 "         		String Delimiter
-max(      		YARN Type Literal
+NUM is now 		Literal   
 "         		String Delimiter
-x         		Variable Identifier
-"         		String Delimiter
-,         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
-) is      		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
-answer    		Variable Identifier
-R         		Assignment Operation
-SMALLR OF 		Min Operator
-x         		Variable Identifier
-AN        		Operator Delimiter
-y         		Variable Identifier
-VISIBLE   		Output Keyword
-"         		String Delimiter
-min(      		YARN Type Literal
-"         		String Delimiter
-x         		Variable Identifier
-"         		String Delimiter
-,         		YARN Type Literal
-"         		String Delimiter
-y         		Variable Identifier
-"         		String Delimiter
-) is      		Literal   
-"         		String Delimiter
-answer    		Variable Identifier
+NUM       		Variable Identifier
 KTHXBYE   		End of Program
