@@ -2,6 +2,7 @@ from lexical import *
 import re
 
 variablesList = []
+printToTerminal = []
 
 # remove comments from lexeme table
 def removeComments(lexTable):
@@ -48,6 +49,48 @@ def assign(lexemesList, varName):
     elif (lexemesList[0][1] == "Typecast Keyword"):
         addVariable(varName, typecast(lexemesList))
 
+def printOutput(lexemesList):
+    stringToPrint = ""
+
+    while (lexemesList):
+        # VARIABLE NAME
+        if (lexemesList[0][1] == "Variable Identifier"):
+            stringToPrint += (str(findVar(lexemesList.pop(0)[0])) + ' ')
+
+        # STRING
+        elif (lexemesList[0][1] == "String Delimiter"): 
+            # temp = ""
+
+            if lexemesList.pop(0)[0] == '"':
+                stringToPrint += lexemesList.pop(0)[0] + ' '
+
+                if lexemesList.pop(0)[0] != '"':
+                    # error
+                    print("Error: invalid string in printing")
+
+            stringToPrint = (str(stringToPrint) + " ")
+
+        # BOOLEAN OPERATIONS
+        elif (lexemesList[0][1] in boolKeywords):
+            stringToPrint += (str(booleanOperations(lexemesList)) + ' ')
+
+        # ARITHMETIC OPERATIONS
+        elif (lexemesList[0][1] in arithmeticKeywords):
+            stringToPrint += (str(arithmeticOp(lexemesList)) + ' ')
+
+        # COMPARISON OPERATIONS
+        elif (lexemesList[0][1] in compareKeywords):
+            stringToPrint += (str(comparisonOperators(lexemesList)) + ' ')
+
+        # TYPECAST 
+        elif (lexemesList[0][1] == "Typecast Keyword"):
+            stringToPrint += (str(typecast(lexemesList)) + ' ')
+
+        else: 
+            break
+    printToTerminal.append(stringToPrint)
+    addVariable("IT", stringToPrint)
+
 def arithmeticOperations(operations, op1, op2):
     # determine data type of operands 
     if (("." in str(op1)) or ("." in str(op2))):
@@ -59,7 +102,7 @@ def arithmeticOperations(operations, op1, op2):
 
     # determine operators
     if (operations[1] == "Addition Operator"):
-        return op1 + op2
+        return int(op1) + int(op2)
 
     elif (operations[1] == "Subtraction Operator"):
         return op1 - op2
@@ -81,7 +124,9 @@ def arithmeticOperations(operations, op1, op2):
 
 def arithmeticOp(lexemesList):
     operations = []
+    result = None
 
+    # print(lexemesList)
     # for (nested) operations
     while (lexemesList[0][1] in arithmeticKeywords): 
         operations.append(lexemesList.pop(0))
@@ -107,6 +152,8 @@ def arithmeticOp(lexemesList):
     # if operand is a typecast keyword
     elif(lexemesList[0][1] == "Typecast Keyword"):
         firstOp = typecast(lexemesList)
+
+    print("operations: " + str(operations))
 
     # PERFORM OPERATIONS 
     while operations: 
@@ -514,7 +561,7 @@ def parse(lexTable, userInput):
     else: 
         return("Invalid Syntax: no KTHXBYE keyword")
 
-    return getStatements(cleanLex, userInput)
+    return getStatements(cleanLex, userInput), printToTerminal
 
 def getStatements(cleanLex, inputValues):
     # iterate over statements in the code 
@@ -523,17 +570,22 @@ def getStatements(cleanLex, inputValues):
         token = lexeme[0]
         tokenDesc = lexeme[1]
 
-        # if statement is a variable declaration
+        # VARIABLE DECLARATION
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
 
+        # INPUT STATEMENT ("GIMMEH")
         elif (tokenDesc == "Input Keyword"):
-            print("IM HERE!!")
             addVariable(cleanLex.pop(0)[0], inputValues.pop(0))
 
+        # PRINT STATEMENT ("VISIBLE")
+        elif (tokenDesc == "Output Keyword"):
+            printOutput(cleanLex)
+
+        # TYPECAST 
         elif (token == "MAEK"):                             # MAEK
             addVariable("IT", typecast(cleanLex))
-        
+
         # IF-THEN STATEMENTS 
         elif (tokenDesc == "Start of If-then Delimiter"):    # O RLY?
             ifThenState(cleanLex)
@@ -567,6 +619,6 @@ def getStatements(cleanLex, inputValues):
                 elif (cleanLex[0][0] == "IS NOW A"):
                     addVariable("IT", typecast(cleanLex))
 
-    print(variablesList)
+    # print(variablesList)
 
     return variablesList

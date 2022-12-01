@@ -5,49 +5,136 @@ I HAS A   		Variable Declaration
 x         		Variable Identifier
 I HAS A   		Variable Declaration
 y         		Variable Identifier
+I HAS A   		Variable Declaration
+answer    		Variable Identifier
 VISIBLE   		Output Keyword
 "         		String Delimiter
-Gimmeh x  		Literal   
+x:        		Literal   
 "         		String Delimiter
 GIMMEH    		Input Keyword
 x         		Variable Identifier
 VISIBLE   		Output Keyword
 "         		String Delimiter
-Gimmeh y  		Literal   
+y:        		Literal   
 "         		String Delimiter
 GIMMEH    		Input Keyword
 y         		Variable Identifier
-BOTH SAEM 		Equal Operator
+answer    		Variable Identifier
+R         		Assignment Operation
+SUM OF    		Addition Operator
 x         		Variable Identifier
 AN        		Operator Delimiter
 y         		Variable Identifier
-OBTW      		Multi-Line Comment Delimiter
-  output will be given to the implicit IT variable		Comment Literal
-  since it was not given to any variable		Comment Literal
-TLDR      		Multi-Line Comment Delimiter
 VISIBLE   		Output Keyword
 x         		Variable Identifier
 "         		String Delimiter
-==        		YARN Type Literal
++         		YARN Type Literal
 "         		String Delimiter
 y         		Variable Identifier
 "         		String Delimiter
  is       		Literal   
 "         		String Delimiter
-IT        		Variable Identifier
-BTW       		Single-Line Comment Delimiter
-uses the implicit variable 		Comment Literal
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+DIFF OF   		Subtraction Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
 VISIBLE   		Output Keyword
 x         		Variable Identifier
 "         		String Delimiter
-!=        		YARN Type Literal
+-         		YARN Type Literal
 "         		String Delimiter
 y         		Variable Identifier
 "         		String Delimiter
  is       		Literal   
 "         		String Delimiter
-DIFFRINT  		Not Equal Operator
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+PRODUKT OF		Multiplication Operator
 x         		Variable Identifier
 AN        		Operator Delimiter
 y         		Variable Identifier
+VISIBLE   		Output Keyword
+x         		Variable Identifier
+"         		String Delimiter
+*         		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+QUOSHUNT OF		Quotient Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
+VISIBLE   		Output Keyword
+x         		Variable Identifier
+"         		String Delimiter
+/         		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+MOD OF    		Modulo Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
+VISIBLE   		Output Keyword
+x         		Variable Identifier
+"         		String Delimiter
+%         		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+BIGGR OF  		Max Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
+VISIBLE   		Output Keyword
+"         		String Delimiter
+max(      		YARN Type Literal
+"         		String Delimiter
+x         		Variable Identifier
+"         		String Delimiter
+,         		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+) is      		Literal   
+"         		String Delimiter
+answer    		Variable Identifier
+answer    		Variable Identifier
+R         		Assignment Operation
+SMALLR OF 		Min Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
+VISIBLE   		Output Keyword
+"         		String Delimiter
+min(      		YARN Type Literal
+"         		String Delimiter
+x         		Variable Identifier
+"         		String Delimiter
+,         		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+) is      		Literal   
+"         		String Delimiter
+answer    		Variable Identifier
 KTHXBYE   		End of Program

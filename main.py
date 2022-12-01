@@ -101,8 +101,12 @@ def program():
     if isinstance(syntaxAnalyzer, str):  # catch if error
         messagebox.showinfo("Error", syntaxAnalyzer)
     else:               # clear table per execution
-        for syntax in syntaxAnalyzer:  # insert values of lexemes
+        for syntax in syntaxAnalyzer[0]:  # insert values of lexemes
             symbol_part.insert(parent = '', index = 'end', values = (syntax[0], syntax[1]))
+
+    for printing in syntaxAnalyzer[1]:
+        terminal_box.insert(END, printing)
+        terminal_box.insert(END, "\n")
 
 window = Tk()
 window.title("LOLCode Interpreter")
