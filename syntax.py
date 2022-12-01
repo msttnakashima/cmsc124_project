@@ -1,4 +1,4 @@
-from lex import *
+from lexical import *
 import re
 
 variablesList = []
@@ -243,10 +243,10 @@ def comparisonOperators(lexemesList):
 
     # if operand is a variable 
     elif (curr[1] == "Variable Identifier"):
-        temp = lexemesList.pop(0)
+        # temp = lexemesList.pop(0)
 
         # find variable name 
-        firstOp = findVar(temp[0])
+        firstOp = findVar(curr[0])
 
     # boolean operations 
     elif (curr[1] in boolKeywords):
@@ -345,6 +345,7 @@ def typecast(lexemesList):
 
 
 def findVar(variableName):
+    print("variable name: " + str(variableName))
     # find variable name 
     for variable in variablesList:
         if (variable[0] == variableName):
@@ -413,6 +414,7 @@ def addVariable(variableName, newVal):
             break
         temp += 1
     variablesList.insert(temp, (variableName, newVal))
+    print(variablesList)
 
 def ifThenState(lexemesList):
     isMatch = False
@@ -512,9 +514,9 @@ def parse(lexTable, userInput):
     else: 
         return("Invalid Syntax: no KTHXBYE keyword")
 
-    return getStatements(cleanLex)
+    return getStatements(cleanLex, userInput)
 
-def getStatements(cleanLex):
+def getStatements(cleanLex, inputValues):
     # iterate over statements in the code 
     while cleanLex: 
         lexeme = cleanLex.pop(0)
@@ -524,6 +526,10 @@ def getStatements(cleanLex):
         # if statement is a variable declaration
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
+
+        elif (tokenDesc == "Input Keyword"):
+            print("IM HERE!!")
+            addVariable(cleanLex.pop(0)[0], inputValues.pop(0))
 
         elif (token == "MAEK"):                             # MAEK
             addVariable("IT", typecast(cleanLex))
@@ -538,7 +544,7 @@ def getStatements(cleanLex):
 
         elif (token == "GTFO"):                              # GTFO
             break
-
+    
         else: 
             if (cleanLex):
                 if (cleanLex[0][1] == "Assignment Operation"):          # R

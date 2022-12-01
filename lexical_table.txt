@@ -1,130 +1,53 @@
 LEXEME			CLASSIFICATION
-OBTW      		Multi-Line Comment Delimiter
-This is a sample program in lolcode that computes for the age in years or months.		Comment Literal
-TLDR      		Multi-Line Comment Delimiter
 HAI       		Start of Program
 1.2       		NUMBAR Type Literal
 I HAS A   		Variable Declaration
-choice    		Variable Identifier
-VISIBLE   		Output Keyword
-"         		String Delimiter
-1. Age in years		Literal   
-"         		String Delimiter
-VISIBLE   		Output Keyword
-"         		String Delimiter
-2. Age in months		Literal   
-"         		String Delimiter
-VISIBLE   		Output Keyword
-"         		String Delimiter
-3. Exit   		Literal   
-"         		String Delimiter
-VISIBLE   		Output Keyword
-"         		String Delimiter
-What do you want to do? 		Literal   
-"         		String Delimiter
-GIMMEH    		Input Keyword
-choice    		Variable Identifier
-OBTW      		Multi-Line Comment Delimiter
-    line below is not required		Comment Literal
-    it is only done here since original lolcode specs		Comment Literal
-      specify that inputs are always YARN		Comment Literal
-    for your project however, input is implicitly typecasted		Comment Literal
-      to NUMBR or NUMBAR if possible.		Comment Literal
-    you may comment the line below if you will use this program		Comment Literal
-      for your project		Comment Literal
-TLDR      		Multi-Line Comment Delimiter
-choice    		Variable Identifier
-R         		Assignment Operation
-MAEK      		Typecast Keyword
-choice    		Variable Identifier
-A         		Typecast Keyword
-NUMBR     		NUMBR Type Literal
+x         		Variable Identifier
 I HAS A   		Variable Declaration
-year      		Variable Identifier
+y         		Variable Identifier
+VISIBLE   		Output Keyword
+"         		String Delimiter
+Gimmeh x  		Literal   
+"         		String Delimiter
+GIMMEH    		Input Keyword
+x         		Variable Identifier
+VISIBLE   		Output Keyword
+"         		String Delimiter
+Gimmeh y  		Literal   
+"         		String Delimiter
+GIMMEH    		Input Keyword
+y         		Variable Identifier
+BOTH SAEM 		Equal Operator
+x         		Variable Identifier
+AN        		Operator Delimiter
+y         		Variable Identifier
+OBTW      		Multi-Line Comment Delimiter
+  output will be given to the implicit IT variable		Comment Literal
+  since it was not given to any variable		Comment Literal
+TLDR      		Multi-Line Comment Delimiter
+VISIBLE   		Output Keyword
+x         		Variable Identifier
+"         		String Delimiter
+==        		YARN Type Literal
+"         		String Delimiter
+y         		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
 IT        		Variable Identifier
-R         		Assignment Operation
-choice    		Variable Identifier
 BTW       		Single-Line Comment Delimiter
-IT = choice 		Comment Literal
-WTF?      		Start of Switch-case
-BTW       		Single-Line Comment Delimiter
-WTF? uses IT variable 		Comment Literal
-OMG       		Case Delimiter
-1         		NUMBR Type Literal
+uses the implicit variable 		Comment Literal
 VISIBLE   		Output Keyword
+x         		Variable Identifier
 "         		String Delimiter
-enter year		Literal   
+!=        		YARN Type Literal
 "         		String Delimiter
-GIMMEH    		Input Keyword
-year      		Variable Identifier
-BTW       		Single-Line Comment Delimiter
-2020-year 		Comment Literal
-VISIBLE   		Output Keyword
-DIFF OF   		Subtraction Operator
-2020      		NUMBR Type Literal
-AN        		Operator Delimiter
-year      		Variable Identifier
+y         		Variable Identifier
 "         		String Delimiter
- years old		Literal   
+ is       		Literal   
 "         		String Delimiter
-GTFO      		Variable Identifier
-OMG       		Case Delimiter
-2         		NUMBR Type Literal
-VISIBLE   		Output Keyword
-"         		String Delimiter
-enter year		Literal   
-"         		String Delimiter
-GIMMEH    		Input Keyword
-year      		Variable Identifier
-BTW       		Single-Line Comment Delimiter
-(2020-year)*12 		Comment Literal
-VISIBLE   		Output Keyword
-PRODUKT OF		Multiplication Operator
-DIFF OF   		Subtraction Operator
-2020      		NUMBR Type Literal
-AN        		Operator Delimiter
-year      		Variable Identifier
-AN        		Operator Delimiter
-12        		NUMBR Type Literal
-"         		String Delimiter
- months old		Literal   
-"         		String Delimiter
-GTFO      		Variable Identifier
-OMGWTF    		Default Case Keyword
-VISIBLE   		Output Keyword
-"         		String Delimiter
-choice is not 1 or 2		Literal   
-"         		String Delimiter
-OIC       		End of If-then
-BTW       		Single-Line Comment Delimiter
-choice!=1 && choice!=2 && choice!=3 		Comment Literal
-ALL OF    		Infinite Arity And Operator
 DIFFRINT  		Not Equal Operator
-choice    		Variable Identifier
+x         		Variable Identifier
 AN        		Operator Delimiter
-1         		NUMBR Type Literal
-AN        		Operator Delimiter
-DIFFRINT  		Not Equal Operator
-choice    		Variable Identifier
-AN        		Operator Delimiter
-2         		NUMBR Type Literal
-AN        		Operator Delimiter
-DIFFRINT  		Not Equal Operator
-choice    		Variable Identifier
-AN        		Operator Delimiter
-3         		NUMBR Type Literal
-O RLY?    		Start of If-then Delimiter
-YA RLY    		If Keyword
-VISIBLE   		Output Keyword
-"         		String Delimiter
-invalid input!		Literal   
-"         		String Delimiter
-BTW       		Single-Line Comment Delimiter
-if choice is not 1,2,3 then invalid input 		Comment Literal
-NO WAI    		Else Keyword
-VISIBLE   		Output Keyword
-"         		String Delimiter
-goodbye!  		YARN Type Literal
-"         		String Delimiter
-OIC       		End of If-then
+y         		Variable Identifier
 KTHXBYE   		End of Program
