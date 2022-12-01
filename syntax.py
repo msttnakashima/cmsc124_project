@@ -24,7 +24,7 @@ def assign(lexemesList, varName):
 
     # BOTH OF, EITHER OF, WON OF, NOT, ALL OF, ANY OF 
     elif (lexemesList[0][1] in boolKeywords):
-        print("im here")
+        # print("im here")
         addVariable(varName, booleanOperations(lexemesList))
         # print(booleanOperations(lexemesList))
 
@@ -53,22 +53,31 @@ def printOutput(lexemesList):
     stringToPrint = ""
 
     while (lexemesList):
+        print(variablesList)
+        # VARIABLE ASSIGNMENT USING "R"
+        # if (lexemesList[1][0] == "R"):
+        #     assign(lexemesList, lexemesList.pop(0))
+
         # VARIABLE NAME
         if (lexemesList[0][1] == "Variable Identifier"):
             stringToPrint += (str(findVar(lexemesList.pop(0)[0])) + ' ')
+            if (len(lexemesList) > 0):
+                if (lexemesList[0][1] == "Variable Identifier"):
+                    break
 
         # STRING
         elif (lexemesList[0][1] == "String Delimiter"): 
             # temp = ""
 
             if lexemesList.pop(0)[0] == '"':
+                # print(lexemesList.pop(0)[0])
                 stringToPrint += lexemesList.pop(0)[0] + ' '
 
                 if lexemesList.pop(0)[0] != '"':
                     # error
                     print("Error: invalid string in printing")
 
-            stringToPrint = (str(stringToPrint) + " ")
+            # stringToPrint = (str(stringToPrint) + " ")
 
         # BOOLEAN OPERATIONS
         elif (lexemesList[0][1] in boolKeywords):
@@ -102,24 +111,31 @@ def arithmeticOperations(operations, op1, op2):
 
     # determine operators
     if (operations[1] == "Addition Operator"):
-        return int(op1) + int(op2)
+        print("op1 + op2 = " + str(op1+op2))
+        return op1+op2
 
     elif (operations[1] == "Subtraction Operator"):
-        return op1 - op2
+        print("op1 - op2 = " + str(op1-op2))
+        return op1-op2
 
     elif (operations[1] == "Multiplication Operator"):
-        return op1 * op2
+        print("op1 * op2 = " + str(op1*op2))
+        return op1*op2
 
     elif (operations[1] == "Quotient Operator"):
-        return op1 // op2
+        print("op1 // op2 = " + str(op1//op2))
+        return op1//op2
 
     elif (operations[1] == "Modulo Operator"):
-        return op1 % op2
+        print("op1 % op2 = " + str(op1%op2))
+        return op1%op2
 
     elif (operations[1] == "Max Operator"):
+        print("max(op1, op2) = " + str(max(op1, op2)))
         return max(op1, op2)
 
     elif (operations[1] == "Min Operator"):
+        print("min(op1, op2) = " + str(min(op1, op2)))
         return min(op1, op2)
 
 def arithmeticOp(lexemesList):
@@ -153,12 +169,12 @@ def arithmeticOp(lexemesList):
     elif(lexemesList[0][1] == "Typecast Keyword"):
         firstOp = typecast(lexemesList)
 
-    print("operations: " + str(operations))
+    # print("operations: " + str(operations))
 
     # PERFORM OPERATIONS 
     while operations: 
         result = arithmeticOperations(operations.pop(0), firstOp, getSecondOp(lexemesList))
-    
+
     return result 
 
 def getSecondOp(lexemesList):
@@ -392,7 +408,7 @@ def typecast(lexemesList):
 
 
 def findVar(variableName):
-    print("variable name: " + str(variableName))
+    # print("variable name: " + str(variableName))
     # find variable name 
     for variable in variablesList:
         if (variable[0] == variableName):
@@ -461,7 +477,7 @@ def addVariable(variableName, newVal):
             break
         temp += 1
     variablesList.insert(temp, (variableName, newVal))
-    print(variablesList)
+    # print(variablesList)
 
 def ifThenState(lexemesList):
     isMatch = False
@@ -499,7 +515,7 @@ def foundCond(lexemesList):
     getStatements(ifThenStatements)
 
 
-def switchCase(lexemesList):
+def switchCase(lexemesList, inputValues):
     caseCond = 0
     isMatch = False 
 
@@ -516,12 +532,12 @@ def switchCase(lexemesList):
 
             # check if IT variable matches case conditon 
             if (caseCond == findVar("IT")):
-                foundCase(lexemesList)
+                foundCase(lexemesList, inputValues)
                 isMatch = True 
             
         elif (lexemesList[0][1] == "Default Case Keyword"):
             isMatch = True 
-            foundCase(lexemesList)
+            foundCase(lexemesList, inputValues)
 
         if isMatch == True:
             while lexemesList[0][1] != "End of If-then":
@@ -530,18 +546,19 @@ def switchCase(lexemesList):
             break                       # break while loop
         lexemesList.pop(0)
 
-def foundCase(lexemesList):
+def foundCase(lexemesList, inputValues):
     caseStatements = []
 
     while lexemesList[0][1] not in ["Case Delimiter", "Default Case Keyword", "End of If-then"]:
         caseStatements.append(lexemesList.pop(0))
     
-    getStatements(caseStatements)
+    getStatements(caseStatements, inputValues)
 
 # parse lexemes 
 def parse(lexTable, userInput):
     startFlag = False       # flag if the start of the program has been detected 
     cleanLex = []
+    printToTerminal.clear()
     variablesList.clear()
 
     # CHECK FOR COMMENTS (not considered as statements)
@@ -570,7 +587,7 @@ def getStatements(cleanLex, inputValues):
         token = lexeme[0]
         tokenDesc = lexeme[1]
 
-        # VARIABLE DECLARATION
+        # VARIABLE DECLARATION ("I HAS A")
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
 
@@ -592,7 +609,7 @@ def getStatements(cleanLex, inputValues):
 
         # SWITCH CASES
         elif (tokenDesc == "Start of Switch-case"):         # WTF?
-            switchCase(cleanLex)
+            switchCase(cleanLex, inputValues)
 
         elif (token == "GTFO"):                              # GTFO
             break

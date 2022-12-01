@@ -6,6 +6,7 @@ from lexical import *
 from syntax import *
 
 userInput = []
+terminalStrings = []
 command = ""
 
 # function to open a file 
@@ -60,14 +61,20 @@ def process_input(event):
 # called to execute the program in the text box
 def program():
     global editor
-    
-    userInput = []
 
     lexeme_part.delete(*lexeme_part.get_children())  
     symbol_part.delete(*symbol_part.get_children())
+    # terminal_box.delete("1.0", END)
 
     # write lexemes
     lexicalTable = tokenize(editor.get("1.0", 'end-1c'))
+
+
+    if isinstance(lexicalTable, str):  # catch if error
+        messagebox.showinfo("Error", lexicalTable)
+    else:               # clear table per execution
+        for lexeme in lexicalTable:  # insert values of lexemes
+            lexeme_part.insert(parent = '', index = 'end', values = (lexeme[0], lexeme[1]))
 
     # if isinstance(lexicalTable, str):  # catch if error
     #     messagebox.showinfo("Error", lexicalTable)
@@ -90,14 +97,13 @@ def program():
 
     # write lexemes 
     syntaxAnalyzer = parse(lexicalTable, userInput.copy())
-    if isinstance(lexicalTable, str):  # catch if error
-        messagebox.showinfo("Error", lexicalTable)
-    else:               # clear table per execution
-        for lexeme in lexicalTable:  # insert values of lexemes
-            lexeme_part.insert(parent = '', index = 'end', values = (lexeme[0], lexeme[1]))
+    # if isinstance(lexicalTable, str):  # catch if error
+    #     messagebox.showinfo("Error", lexicalTable)
+    # else:               # clear table per execution
+    #     for lexeme in lexicalTable:  # insert values of lexemes
+    #         lexeme_part.insert(parent = '', index = 'end', values = (lexeme[0], lexeme[1]))
 
     # write syntax
-    # syntaxAnalyzer = parse(lexicalTable, userInput.copy())
     if isinstance(syntaxAnalyzer, str):  # catch if error
         messagebox.showinfo("Error", syntaxAnalyzer)
     else:               # clear table per execution
@@ -107,6 +113,10 @@ def program():
     for printing in syntaxAnalyzer[1]:
         terminal_box.insert(END, printing)
         terminal_box.insert(END, "\n")
+
+    terminal_box.insert(END, "\n================\n\n")
+
+    userInput.clear()
 
 window = Tk()
 window.title("LOLCode Interpreter")
