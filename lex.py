@@ -1,10 +1,16 @@
 import re
 
+arithmeticKeywords = ["Addition Operator", "Subtraction Operator", "Multiplication Operator", "Quotient Operator", "Modulo Operator", "Max Operator", "Min Operator"]
+boolKeywords = ["And Operator", "Or Operator", "Xor Operator", "Boolean Not Operator", "Infinite Arity And Operator", "Infinite Arity Or Operator"]
+compareKeywords = ["Equal Operator", "Not Equal Operator"]
+
+literalKeywords = ["NUMBR Type Literal", "NUMBAR Type Literal", "YARN Type Literal", "TROOF Type Literal"]
+
 keywords = {
-    'NUMBR' : "Type Literal",
-    'NUMBAR' : "Type Literal",
-    'YARN' : "Type Literal",
-    'TROOF' : "Type Literal",
+    'NUMBR' : "NUMBR Type Literal",
+    'NUMBAR' : "NUMBAR Type Literal",
+    'YARN' : "YARN Type Literal",
+    'TROOF' : "TROOF Type Literal",
     "HAI" : "Start of Program",
     "KTHXBYE" : "End of Program",
     "BTW" : "Single-Line Comment Delimiter",
@@ -23,8 +29,8 @@ keywords = {
     "EITHER OF" : "Or Operator",
     "WON OF" : "Xor Operator",
     "NOT" : "Boolean Not Operator",
-    "ANY OF" : "Infinite Arity And Operator",
-    "ALL OF" : "Infinite Arity Or Operator",
+    "ANY OF" : "Infinite Arity Or Operator",
+    "ALL OF" : "Infinite Arity And Operator",
     "BOTH SAEM" : "Equal Operator",
     "DIFFRINT" : "Not Equal Operator",
     "SMOOSH" : "Concatenation Keyword",
@@ -56,7 +62,8 @@ keywords = {
 def tokenize(string):
     lexTable = []
     lineNum = 1
-    commentDetected = False                         # comment flag 
+    comment = False                         # comment flag 
+    
     for line in string.split("\n"):                 # iterate per line 
         token = ""                                  # stores words in line 
         if line == "" or line.isspace():            # if end of line is reached
@@ -64,8 +71,23 @@ def tokenize(string):
             continue
         for word in line.split():                   # iterate over each word per line 
             if word == "TLDR":                      # check if it is the end of a multi-line comment               
-                commentDetected = False             
-            if (commentDetected or word.isspace() or word == '') and token == "":   # if line is a comment, move to the next line (ignore)
+                comment = False             
+            if (comment):                                   # if line is a mult-line comment 
+                lexTable.append((line, "Comment Literal"))           # add comment as comment string to lexeme table 
+                lineNum += 1
+                break
+            elif word == "BTW":                             # single-line comment
+                lexTable.append((word, keywords[word]))   # add comment as comment string to lexeme table 
+                singleLineComment = 0
+                for temp in line.split():
+                    if (temp == "BTW"):
+                        singleLineComment = 1
+                    elif (singleLineComment == 1):
+                        token += temp
+                        token += " "
+                lexTable.append((token, "Comment Literal"))
+                break                                       # ignore whole line 
+            elif (word.isspace() or word == '') and token == "":   # if line is an empty string, move to the next line (ignore)
                 continue
 
             # at the start of the line 
@@ -83,16 +105,19 @@ def tokenize(string):
                 else:                               
                     # check if word is a boolean value
                     if word == "WIN" or word == "FAIL":                               
-                        lexTable.append((word, "Literal"))
+                        lexTable.append((word, keywords["TROOF"]))
                     
+                    elif bool(re.match("^\-?[0-9]+$", word)):
+                        lexTable.append((word, keywords["NUMBR"]))
+
                     # check if word is a float or integer
-                    elif bool(re.match("^\-?[0-9]+\.[0-9]+$", word)) or bool(re.match("^\-?[0-9]+$", word)):             
-                        lexTable.append((word, "Literal"))  
+                    elif bool(re.match("^\-?[0-9]+\.[0-9]+$", word)):             
+                        lexTable.append((word, keywords["NUMBAR"]))  
                     
                     # else, check if word has the form "literal" (for strings)
                     elif bool(re.match("\".*\"", word)):                             
                         lexTable.append((word[0], "String Delimiter"))              # extract double quote at the start of the string
-                        lexTable.append((word[1:(len(word)-1)], "Literal"))         # extract string literal (words inside double quotes)
+                        lexTable.append((word[1:(len(word)-1)], keywords["YARN"]))         # extract string literal (words inside double quotes)
                         lexTable.append((word[len(word)-1], "String Delimiter"))    # extact double quote at the end of the string 
                     
                     # else, check if word is a double quote
@@ -106,7 +131,6 @@ def tokenize(string):
 
                     # else, check if word is a space or is empty (end of line)
                     elif word.isspace() == False and word != '':
-                        print("word")
                         return ("Line " + str(lineNum) + ": unidentified token " + word)    # invalid token 
             
             # not at the start of the line and the word is a double quote 
@@ -138,16 +162,13 @@ def tokenize(string):
                     lexTable.append((word, "identifier"))
                     token = ''
                 else:
-                    print("token")
                     return ("Line "+str(lineNum)+": unidentified token "+token)     # invalid token
 
             # check if word is a comment identifier 
-            if word == "OBTW":                      # multi-line comment
-                commentDetected = True              # set comment flag to true 
-            elif word == "BTW":                     # single-line comment 
-                break                               # ignore whole line 
-        lineNum += 1                                # increment line number 
-    print(lexTable)
+            if word == "OBTW":                              # multi-line comment
+                comment = True                      # set comment flag to true 
+        lineNum += 1                                        # increment line number 
+    # print(lexTable)
 
     # CHECKING PURPOSES ONLY
     # put lexical table in a text file 
