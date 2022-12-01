@@ -24,10 +24,10 @@ HAI 1.2
 
   choice R MAEK choice A NUMBR
 
-OBTW
   I HAS A year
 
   IT R choice   BTW IT = choice
+
   WTF?          BTW WTF? uses IT variable
   OMG 1
     VISIBLE "enter year"
@@ -56,6 +56,5 @@ OBTW
     NO WAI
       VISIBLE "goodbye!"
   OIC
-TLDR
 
 KTHXBYE

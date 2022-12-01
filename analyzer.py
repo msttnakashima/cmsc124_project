@@ -52,12 +52,15 @@ def assign(lexemesList, varName):
     elif (lexemesList[0][1] == "Typecast Keyword"):
         addVariable(varName, typecast(lexemesList))
 
+    return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+
 # prints the output to the terminal 
 def printOutput(lexemesList):
     stringToPrint = ""
 
     while (lexemesList):
-        print(variablesList)
+        print("I AM HERE!")
+        # print(variablesList)
         # VARIABLE ASSIGNMENT USING "R"
         # if (lexemesList[1][0] == "R"):
         #     assign(lexemesList, lexemesList.pop(0))
@@ -149,6 +152,9 @@ def arithmeticOperations(operations, op1, op2):
         print("min(op1, op2) = " + str(min(op1, op2)))
         return min(op1, op2)
 
+    else: 
+        return ('Invalid Syntax: "' + str(operations[1]) + '" is not a valid keyword.')
+
 # find operands for arithmetic operation 
 def arithmeticOp(lexemesList):
     operations = []
@@ -181,7 +187,8 @@ def arithmeticOp(lexemesList):
     elif(lexemesList[0][1] == "Typecast Keyword"):
         firstOp = typecast(lexemesList)
 
-    # print("operations: " + str(operations))
+    else: 
+        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
 
     # PERFORM OPERATIONS (including nested ones)
     while operations: 
@@ -235,7 +242,7 @@ def getSecondOp(lexemesList):
         elif(lexemesList[0][1] == "Typecast Keyword"):
             return (typecast(lexemesList))
 
-    return("Invalid syntax: invalid arithmetic operator")
+    return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
 
 # function to perform boolean operations
 def booleanOperations(lexemesList):
@@ -266,7 +273,7 @@ def booleanOperations(lexemesList):
         firstOp = comparisonOperators(lexemesList)
 
     else: 
-        return("Invalid syntax: invalid boolean operator")
+        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
 
     return boolProcess(operations, firstOp, lexemesList)
 
@@ -362,7 +369,7 @@ def comparisonOperators(lexemesList):
         firstOp = typecast(lexemesList)
 
     else: 
-        return("Invalid syntax: invalid relational operator")
+        return ('Invalid Syntax: "' + str(curr[0]) + '" is not a valid keyword.')
 
     return compareProcess(operations, firstOp, lexemesList)
 
@@ -462,6 +469,9 @@ def typecast(lexemesList):
         else:
             return(str(value))
 
+    else: 
+        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+
 
 def findVar(variableName):
     # print("variable name: " + str(variableName))
@@ -517,12 +527,12 @@ def variableAssignment(lexemesList):
                 return (variableName, value)
 
             else: 
-                return("Invalid syntax: variable initialization")
+                return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
         else: 
             return((variableName, "NULL"))
 
     else:
-        return ("Invalid syntax: variable declaration")
+        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
 
 def addVariable(variableName, newVal):
     temp = 0
@@ -576,6 +586,8 @@ def switchCase(lexemesList, inputValues):
     caseCond = 0
     isMatch = False 
 
+    print(lexemesList)
+
     while lexemesList[0][1] != "End of If-then":            # OIC keyword
         if (lexemesList[0][1] == "Case Delimiter"):                        # case keyword 
             lexemesList.pop(0)                  
@@ -628,13 +640,13 @@ def parse(lexTable, userInput):
         if (cleanLex[0][1] in ["NUMBR Type Literal", "NUMBAR Type Literal"]):                           # check if "HAI" keyword contains a version number 
             cleanLex.remove(cleanLex[0])                            # remove "HAI" version from list 
     else: 
-        return("Invalid Syntax: no HAI keyword")
+        return('Invalid Syntax: no "HAI" keyword')
 
     # CHECK FOR "KTHXBYE"
     if (cleanLex[len(cleanLex) - 1][1] == "End of Program"):        # if the last element in the list is the "KTHXBYE" keyword (end of program) 
         cleanLex.remove(cleanLex[len(cleanLex) - 1])                # remove "KTHXBYE" from list 
     else: 
-        return("Invalid Syntax: no KTHXBYE keyword")
+        return('Invalid Syntax: no "KTHXBYE" keyword')
 
     return getStatements(cleanLex, userInput), printToTerminal
 
@@ -679,7 +691,6 @@ def getStatements(cleanLex, inputValues):
             if (cleanLex):
                 # "R"
                 if (cleanLex[0][1] == "Assignment Operation"):          # R
-                    print("I AM HERE!")
                     assign(cleanLex, token)
 
                 # SUM OF, DIFF OF, PRODUKT OF, QUOSHUNT OF, MOD OF, BIGGR OF, SMALLR OF
@@ -699,6 +710,9 @@ def getStatements(cleanLex, inputValues):
                 # "IS NOW A"
                 elif (cleanLex[0][0] == "IS NOW A"):
                     addVariable("IT", typecast(cleanLex))
+
+                else: 
+                    return ('Invalid Syntax: "' + str(cleanLex[0][0]) + '" is not a valid keyword.')
 
     # print(variablesList)
 

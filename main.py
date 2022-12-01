@@ -95,17 +95,11 @@ def program():
     print(userInput)
 
 
-    # write lexemes 
-    syntaxAnalyzer = parse(lexicalTable, userInput.copy())
-    # if isinstance(lexicalTable, str):  # catch if error
-    #     messagebox.showinfo("Error", lexicalTable)
-    # else:               # clear table per execution
-    #     for lexeme in lexicalTable:  # insert values of lexemes
-    #         lexeme_part.insert(parent = '', index = 'end', values = (lexeme[0], lexeme[1]))
-
     # write syntax
-    if isinstance(syntaxAnalyzer, str):  # catch if error
-        messagebox.showinfo("Error", syntaxAnalyzer)
+    syntaxAnalyzer = parse(lexicalTable, userInput.copy())
+
+    if isinstance(syntaxAnalyzer[0], str):  # catch if error
+        messagebox.showinfo("Error", syntaxAnalyzer[0])
     else:               # clear table per execution
         for syntax in syntaxAnalyzer[0]:  # insert values of lexemes
             symbol_part.insert(parent = '', index = 'end', values = (syntax[0], syntax[1]))
