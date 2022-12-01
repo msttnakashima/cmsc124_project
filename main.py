@@ -87,7 +87,7 @@ def program():
             # print(command)
             # userInput.append(command);
             label = Label(window, text = "Waiting for input.")
-            label.place(x = 820, y = 313)
+            label.place(x = 323, y = 288)
             inputButton.wait_variable(inputFlag)
             userInput.append(inputField.get("1.0", 'end-1c'))
             label.place_forget()
