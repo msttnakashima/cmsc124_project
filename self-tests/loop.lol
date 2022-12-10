@@ -1,11 +1,11 @@
 HAI 1.2
-
+    OBTW
     I HAS A VAR ITZ 10
     IM IN YR LOOPY NERFIN YR VAR TIL BOTH SAEM VAR AN 0
         VISIBLE DIFF OF VAR AN 1
     IM OUTTA YR LOOPY
+    TLDR
 
-    OBTW
     I HAS A temp ITZ 2
 
     BTW prints 2 to 9 using TIL 
@@ -20,5 +20,5 @@ HAI 1.2
     IM IN YR print10 UPPIN YR temp WILE DIFFRINT temp AN 10 
         VISIBLE temp 
     IM OUTTA YR print10
-    TLDR 
+
 KTHXBYE
