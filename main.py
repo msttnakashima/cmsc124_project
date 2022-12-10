@@ -108,8 +108,6 @@ def program():
         terminal_box.insert(END, printing)
         terminal_box.insert(END, "\n")
 
-    terminal_box.insert(END, "\n================\n\n")
-
     userInput.clear()
 
 window = Tk()

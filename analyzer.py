@@ -287,6 +287,7 @@ def boolProcess (operations, x, lexemesList):
         while lexemesList[0][1] == "Operator Delimiter":
             y = getSecondOp(lexemesList)
             x = x and lolToBool(y)
+            addVariable("IT", x)
         return boolToLol(x)
 
     # "ANY OF"
@@ -294,6 +295,7 @@ def boolProcess (operations, x, lexemesList):
         while lexemesList[0][1] == "Operator Delimiter":
             y = getSecondOp(lexemesList)
             x = x or lolToBool(y)
+            addVariable("IT", x)
         return boolToLol(x)
 
     # if it is not a nested operation / reached the root of the nested operation
@@ -551,17 +553,19 @@ def addVariable(variableName, newVal):
 
 def ifThenState(lexemesList, inputValues):
     isMatch = False
-    lexemesList.pop(0)
+    # lexemesList.pop(0)
 
     while lexemesList: 
         print(lexemesList)
         if lexemesList[0][1] == "If Keyword":               # YA RLY
             lexemesList.pop(0)
+            print("IT value: " + str(findVar("IT")))
             if (findVar("IT") == "WIN"):
                 foundCond(lexemesList, inputValues)
                 isMatch = True 
             
             else: 
+                # lexemesList.pop(0)
                 while lexemesList:
                     lexemesList.pop(0)
                     if(lexemesList[0][1] in ["Else Keyword", "End of If-then"]):
