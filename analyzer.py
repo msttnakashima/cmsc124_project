@@ -650,6 +650,118 @@ def foundCase(lexemesList, inputValues):
     print(caseStatements)
     getStatements(caseStatements, inputValues)
 
+# loop 
+def loop(lexemesList, inputValues):
+    lexemesList.pop(0)                  # pop variable identifier 
+
+    operator = lexemesList.pop(0)[0]    # pop operator 
+    lexemesList.pop(0)                  # pop "YR" 
+
+    if lexemesList[0][1] == "Variable Identifier": 
+        var = lexemesList.pop(0)[0]
+        varValue = findVar(var)
+        tilWile = lexemesList.pop(0)[0]
+        oper = lexemesList.pop(0)[0]
+        varName = lexemesList.pop(0)[0]
+        temp1 = int(findVar(varName))
+        lexemesList.pop(0)              # pop "AN"
+        temp2 = 0
+        
+        if lexemesList[0][1] in literalKeywords:
+            temp2 = int(lexemesList.pop(0)[0])
+
+        elif lexemesList[0][1] == "Variable Identifier":
+            temp2 = int(findVar(lexemesList.pop(0)[0]))
+        
+        block = performLoop(lexemesList, inputValues)
+
+        if tilWile == "TIL":
+            if oper == "BOTH SAEM":
+                # while (temp1 == temp2) == False: 
+                while (temp1 != temp2):
+                    getStatements(block.copy(), inputValues)
+
+                    if operator == "UPPIN": 
+                        temp1 = temp1 + 1
+                        addVariable(varName, temp1)
+                    
+                    elif operator == "NERFIN":
+                        temp1 = temp1 - 1
+                        addVariable(varName, temp1)
+                    
+                    else: 
+                        return('Invalid Syntax in loop')
+            
+            elif oper == "DIFFRINT":
+                # while ((temp1 != temp2) == False):
+                while (temp1 == temp2):
+                    getStatements(block.copy(), inputValues)
+
+                    if operator == "UPPIN": 
+                        temp1 = temp1 + 1
+                        addVariable(varName, temp1)
+                    
+                    elif operator == "NERFIN":
+                        temp1 = temp1 - 1
+                        addVariable(varName, temp1)
+                    
+                    else: 
+                        return('Invalid Syntax in loop')
+            
+            else: 
+                return('Invalid Syntax in loop')
+
+        elif tilWile == "WILE":
+            if oper == "BOTH SAEM":
+                while (temp1 == temp2):
+                    getStatements(block.copy(), inputValues)
+
+                    if operator == "UPPIN":
+                        temp1 = temp1 + 1
+                        addVariable(varName, temp1)
+                    
+                    elif operator == "NERFIN":
+                        temp1 = temp1 - 1
+                        addVariable(varName, temp1)
+                    
+                    else: 
+                        return('Invalid Syntax in loop')
+
+            elif oper == "DIFFRINT":
+                # while ((temp1 != temp2) == False):
+                while (temp1 != temp2):
+                    getStatements(block.copy(), inputValues)
+
+                    if operator == "UPPIN": 
+                        temp1 = temp1 + 1
+                        addVariable(varName, temp1)
+                    
+                    elif operator == "NERFIN":
+                        temp1 = temp1 - 1
+                        addVariable(varName, temp1)
+                    
+                    else: 
+                        return('Invalid Syntax in loop')
+            
+            else: 
+                return('Invalid Syntax in loop')
+
+        else: 
+            return('Invalid Syntax in loop')
+
+def performLoop(lexemesList, inputValues):
+    temp = []
+
+    while lexemesList:
+        temp.append(lexemesList.pop(0))
+
+        if lexemesList[0][0] == "IM OUTTA YR":
+            lexemesList.pop(0)
+            lexemesList.pop(0)
+            break
+    
+    return temp
+
 # parse lexemes 
 def parse(lexTable, userInput):
     startFlag = False       # flag if the start of the program has been detected 
@@ -683,19 +795,17 @@ def getStatements(cleanLex, inputValues):
         token = lexeme[0]
         tokenDesc = lexeme[1]
 
-        # print(str(cleanLex) + "\n")
-
         print("token: " + str(token))
 
-        # VARIABLE DECLARATION ("I HAS A")
+        # VARIABLES ("I HAS A")
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
 
-        # INPUT STATEMENT ("GIMMEH")
+        # USER INPUT ("GIMMEH")
         elif (tokenDesc == "Input Keyword"):
             addVariable(cleanLex.pop(0)[0], inputValues.pop(0))
 
-        # PRINT STATEMENT ("VISIBLE")
+        # USER OUTPUT ("VISIBLE")
         elif (tokenDesc == "Output Keyword"):
             printOutput(cleanLex)
 
@@ -703,7 +813,7 @@ def getStatements(cleanLex, inputValues):
         elif (token == "MAEK"):                             # MAEK
             addVariable("IT", typecast(cleanLex))
 
-        # IF-THEN STATEMENTS  ("O RLY?")
+        # IF-ELSE STATEMENTS  ("O RLY?")
         elif (tokenDesc == "Start of If-then Delimiter"):    # O RLY?
             ifThenState(cleanLex, inputValues)
 
@@ -712,30 +822,34 @@ def getStatements(cleanLex, inputValues):
             switchCase(cleanLex, inputValues)
 
         # GTFO
-        elif (token == "Break Keyword"):                              # GTFO
+        elif (tokenDesc == "Break Keyword"):                              # GTFO
             break
     
+        # LOOP 
+        elif (tokenDesc == "Loop Delimiter"):
+            loop(cleanLex, inputValues)
+
         else: 
             if (cleanLex):
                 # "R"
                 if (cleanLex[0][1] == "Assignment Operation"):          # R
                     assign(cleanLex, token)
 
-                # SUM OF, DIFF OF, PRODUKT OF, QUOSHUNT OF, MOD OF, BIGGR OF, SMALLR OF
+                # ARITHMETIC OPERATIONS - SUM OF, DIFF OF, PRODUKT OF, QUOSHUNT OF, MOD OF, BIGGR OF, SMALLR OF
                 elif (tokenDesc in arithmeticKeywords):              
                     addVariable("IT", arithmeticOp(cleanLex))
 
-                # BOTH OF, EITHER OF, WON OF, NOT, ALL OF, ANY OF 
+                # BOOLEAN OPERATIONS - BOTH OF, EITHER OF, WON OF, NOT, ALL OF, ANY OF 
                 elif (tokenDesc in boolKeywords):
                     cleanLex.insert(0, (token, tokenDesc))
                     addVariable("IT", booleanOperations(cleanLex))
 
-                # BOTH SAEM, DIFFRINT
+                # COMPARISON OPERATIONS - BOTH SAEM, DIFFRINT
                 elif (tokenDesc in compareKeywords): 
                     cleanLex.insert(0, (token, tokenDesc))
                     addVariable("IT", comparisonOperators(cleanLex))
 
-                # "IS NOW A"
+                # TYPECAST ("IS NOW A")
                 elif (cleanLex[0][0] == "IS NOW A"):
                     addVariable("IT", typecast(cleanLex))
 
