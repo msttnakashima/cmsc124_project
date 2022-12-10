@@ -64,7 +64,7 @@ def program():
 
     lexeme_part.delete(*lexeme_part.get_children())  
     symbol_part.delete(*symbol_part.get_children())
-    # terminal_box.delete("1.0", END)
+    terminal_box.delete("1.0", END)
 
     # write lexemes
     lexicalTable = tokenize(editor.get("1.0", 'end-1c'))

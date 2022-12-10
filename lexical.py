@@ -56,7 +56,8 @@ keywords = {
     "IM OUTTA YR" : "Loop Delimiter",
     'NOOB' : "Type Literal",
     "AN" : "Operator Delimiter",
-    "I HAS A" : "Variable Declaration"
+    "I HAS A" : "Variable Declaration",
+    "GTFO": "Break Keyword"
 }
 
 def tokenize(string):

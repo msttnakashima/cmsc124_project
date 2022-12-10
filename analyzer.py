@@ -46,7 +46,8 @@ def assign(lexemesList, varName):
     
     # if value is another variable
     elif (lexemesList[0][1] in "Variable Identifier"):
-        addVariable(varName, findVar(lexemesList.pop(0)[0]))
+        temp = findVar(lexemesList.pop(0)[0])
+        addVariable(varName, temp)
 
     # if the value is first typecasted 
     elif (lexemesList[0][1] == "Typecast Keyword"):
@@ -59,7 +60,6 @@ def printOutput(lexemesList):
     stringToPrint = ""
 
     while (lexemesList):
-        print("I AM HERE!")
         # print(variablesList)
         # VARIABLE ASSIGNMENT USING "R"
         # if (lexemesList[1][0] == "R"):
@@ -107,7 +107,7 @@ def printOutput(lexemesList):
 
     # add to output list and assign as "IT"
     printToTerminal.append(stringToPrint)
-    addVariable("IT", stringToPrint)
+    # addVariable("IT", stringToPrint)
 
 # function to perform arithmetic operations
 def arithmeticOperations(operations, op1, op2):
@@ -476,10 +476,13 @@ def typecast(lexemesList):
 def findVar(variableName):
     # print("variable name: " + str(variableName))
     # find variable name 
+    print(variablesList)
+    print(variableName)
     for variable in variablesList:
         if (variable[0] == variableName):
             value = variable[1]
             break
+    # print(str(variableName) + str(value))
     return value 
 
 def variableAssignment(lexemesList):
@@ -535,6 +538,7 @@ def variableAssignment(lexemesList):
         return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
 
 def addVariable(variableName, newVal):
+    print("NewVal: " + str(newVal))
     temp = 0
     for i in range(len(variablesList)):
         if (variablesList[i][0] == variableName):
@@ -545,71 +549,86 @@ def addVariable(variableName, newVal):
     variablesList.insert(temp, (variableName, newVal))
     # print(variablesList)
 
-def ifThenState(lexemesList):
+def ifThenState(lexemesList, inputValues):
     isMatch = False
+    lexemesList.pop(0)
 
     while lexemesList: 
+        print(lexemesList)
         if lexemesList[0][1] == "If Keyword":               # YA RLY
             lexemesList.pop(0)
             if (findVar("IT") == "WIN"):
-                foundCond(lexemesList)
+                foundCond(lexemesList, inputValues)
                 isMatch = True 
             
             else: 
                 while lexemesList:
+                    lexemesList.pop(0)
                     if(lexemesList[0][1] in ["Else Keyword", "End of If-then"]):
                         break
         
         if ((lexemesList[0][1] == "Else Keyword") and isMatch == False): 
             lexemesList.pop(0)
-            foundCond(lexemesList)
+            foundCond(lexemesList, inputValues)
             isMatch = True 
         
         if isMatch == True:
-            while lexemesList[0][1] == "End of If-then":
+            while lexemesList[0][1] != "End of If-then":
                 lexemesList.pop(0)
             lexemesList.pop(0)
             break                   # exit while loop
         lexemesList.pop(0)
 
 # found the condition that matches the IT variable 
-def foundCond(lexemesList):
+def foundCond(lexemesList, inputValues):
     ifThenStatements = []
 
-    while lexemesList[0][1] not in ["Else Keyword", "End of If-then"]:
+    while lexemesList:
         ifThenStatements.append(lexemesList.pop(0))
+
+        if lexemesList[0][1] in ["Else Keyword", "End of If-then"]:
+            break
     
-    getStatements(ifThenStatements)
+    getStatements(ifThenStatements, inputValues)
 
 
 def switchCase(lexemesList, inputValues):
-    caseCond = 0
+    caseCond = ""
     isMatch = False 
 
-    print(lexemesList)
+    # print(lexemesList)
+    print("In switchCase with token " + str(lexemesList[0][0]))
 
     while lexemesList[0][1] != "End of If-then":            # OIC keyword
-        if (lexemesList[0][1] == "Case Delimiter"):                        # case keyword 
+        if (lexemesList[0][1] == "Case Delimiter"):         # OMG keyword 
             lexemesList.pop(0)                  
         
             # CHECK CONDITION OF EACH CASE (literal or variable)
             if (lexemesList[0][1] in literalKeywords):
                 caseCond = lexemesList.pop(0)[0]
+                # addVariable("IT", caseCond)
+                
             elif (lexemesList[0][1] == "Variable Identifier"):
                 temp = lexemesList.pop(0)
                 caseCond = findVar(temp[0])
+                # addVariable("IT", caseCond)
+
+            print("Casecond: " + str(caseCond))
 
             # check if IT variable matches case conditon 
-            if (caseCond == findVar("IT")):
+            if (str(caseCond) == str(findVar("IT"))):  
+                print("i am here!!!")               
                 foundCase(lexemesList, inputValues)
                 isMatch = True 
             
-        elif (lexemesList[0][1] == "Default Case Keyword"):
+        elif (lexemesList[0][1] == "Default Case Keyword"):     # OMGWTF
             isMatch = True 
+            lexemesList.pop(0)
             foundCase(lexemesList, inputValues)
+            
 
         if isMatch == True:
-            while lexemesList[0][1] != "End of If-then":
+            while lexemesList[0][1] != "End of If-then":        # OIC
                 lexemesList.pop(0)
             lexemesList.pop(0)          # pop "OIC" keyword
             break                       # break while loop
@@ -619,9 +638,12 @@ def switchCase(lexemesList, inputValues):
 def foundCase(lexemesList, inputValues):
     caseStatements = []
 
-    while lexemesList[0][1] not in ["Case Delimiter", "Default Case Keyword", "End of If-then"]:
+    print("i am in foundCase!!!")
+    while lexemesList:
         caseStatements.append(lexemesList.pop(0))
-    
+        if lexemesList[0][1] in ["Case Delimiter", "Default Case Keyword", "End of If-then"]:
+            break
+    print(caseStatements)
     getStatements(caseStatements, inputValues)
 
 # parse lexemes 
@@ -659,6 +681,8 @@ def getStatements(cleanLex, inputValues):
 
         # print(str(cleanLex) + "\n")
 
+        print("token: " + str(token))
+
         # VARIABLE DECLARATION ("I HAS A")
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
@@ -677,14 +701,14 @@ def getStatements(cleanLex, inputValues):
 
         # IF-THEN STATEMENTS  ("O RLY?")
         elif (tokenDesc == "Start of If-then Delimiter"):    # O RLY?
-            ifThenState(cleanLex)
+            ifThenState(cleanLex, inputValues)
 
         # SWITCH CASES ("WTF?")
         elif (tokenDesc == "Start of Switch-case"):         # WTF?
             switchCase(cleanLex, inputValues)
 
         # GTFO
-        elif (token == "GTFO"):                              # GTFO
+        elif (token == "Break Keyword"):                              # GTFO
             break
     
         else: 

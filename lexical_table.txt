@@ -1,42 +1,130 @@
 LEXEME			CLASSIFICATION
+OBTW      		Multi-Line Comment Delimiter
+This is a sample program in lolcode that computes for the age in years or months.		Comment Literal
+TLDR      		Multi-Line Comment Delimiter
 HAI       		Start of Program
 1.2       		NUMBAR Type Literal
 I HAS A   		Variable Declaration
-NUM       		Variable Identifier
-ITZ       		Variable Assignment
-2         		NUMBR Type Literal
-BTW       		Single-Line Comment Delimiter
-NUM = 2   		Comment Literal
-I HAS A   		Variable Declaration
-FLOT      		Variable Identifier
-ITZ       		Variable Assignment
-2.5       		NUMBAR Type Literal
-BTW       		Single-Line Comment Delimiter
-FLOT = 2.5 		Comment Literal
-I HAS A   		Variable Declaration
-NAME      		Variable Identifier
-ITZ       		Variable Assignment
+choice    		Variable Identifier
+VISIBLE   		Output Keyword
 "         		String Delimiter
-erika     		YARN Type Literal
+1. Age in years		Literal   
 "         		String Delimiter
-BTW       		Single-Line Comment Delimiter
-NAME = "erika" 		Comment Literal
-BTW       		Single-Line Comment Delimiter
-printing values 		Comment Literal
 VISIBLE   		Output Keyword
-NUM       		Variable Identifier
+"         		String Delimiter
+2. Age in months		Literal   
+"         		String Delimiter
 VISIBLE   		Output Keyword
-FLOT      		Variable Identifier
+"         		String Delimiter
+3. Exit   		Literal   
+"         		String Delimiter
 VISIBLE   		Output Keyword
-NAME      		Variable Identifier
-BTW       		Single-Line Comment Delimiter
-assignment statement: 		Comment Literal
-NUM       		Variable Identifier
+"         		String Delimiter
+What do you want to do? 		Literal   
+"         		String Delimiter
+GIMMEH    		Input Keyword
+choice    		Variable Identifier
+OBTW      		Multi-Line Comment Delimiter
+    line below is not required		Comment Literal
+    it is only done here since original lolcode specs		Comment Literal
+      specify that inputs are always YARN		Comment Literal
+    for your project however, input is implicitly typecasted		Comment Literal
+      to NUMBR or NUMBAR if possible.		Comment Literal
+    you may comment the line below if you will use this program		Comment Literal
+      for your project		Comment Literal
+TLDR      		Multi-Line Comment Delimiter
+choice    		Variable Identifier
 R         		Assignment Operation
-17        		NUMBR Type Literal
+MAEK      		Typecast Keyword
+choice    		Variable Identifier
+A         		Typecast Keyword
+NUMBR     		NUMBR Type Literal
+I HAS A   		Variable Declaration
+year      		Variable Identifier
+IT        		Variable Identifier
+R         		Assignment Operation
+choice    		Variable Identifier
+BTW       		Single-Line Comment Delimiter
+IT = choice 		Comment Literal
+WTF?      		Start of Switch-case
+BTW       		Single-Line Comment Delimiter
+WTF? uses IT variable 		Comment Literal
+OMG       		Case Delimiter
+1         		NUMBR Type Literal
 VISIBLE   		Output Keyword
 "         		String Delimiter
-NUM is now 		Literal   
+enter year		Literal   
 "         		String Delimiter
-NUM       		Variable Identifier
+GIMMEH    		Input Keyword
+year      		Variable Identifier
+BTW       		Single-Line Comment Delimiter
+2020-year 		Comment Literal
+VISIBLE   		Output Keyword
+DIFF OF   		Subtraction Operator
+2020      		NUMBR Type Literal
+AN        		Operator Delimiter
+year      		Variable Identifier
+"         		String Delimiter
+ years old		Literal   
+"         		String Delimiter
+GTFO      		Break Keyword
+OMG       		Case Delimiter
+2         		NUMBR Type Literal
+VISIBLE   		Output Keyword
+"         		String Delimiter
+enter year		Literal   
+"         		String Delimiter
+GIMMEH    		Input Keyword
+year      		Variable Identifier
+BTW       		Single-Line Comment Delimiter
+(2020-year)*12 		Comment Literal
+VISIBLE   		Output Keyword
+PRODUKT OF		Multiplication Operator
+DIFF OF   		Subtraction Operator
+2020      		NUMBR Type Literal
+AN        		Operator Delimiter
+year      		Variable Identifier
+AN        		Operator Delimiter
+12        		NUMBR Type Literal
+"         		String Delimiter
+ months old		Literal   
+"         		String Delimiter
+GTFO      		Break Keyword
+OMGWTF    		Default Case Keyword
+VISIBLE   		Output Keyword
+"         		String Delimiter
+choice is not 1 or 2		Literal   
+"         		String Delimiter
+OIC       		End of If-then
+BTW       		Single-Line Comment Delimiter
+choice!=1 && choice!=2 && choice!=3 		Comment Literal
+ALL OF    		Infinite Arity And Operator
+DIFFRINT  		Not Equal Operator
+choice    		Variable Identifier
+AN        		Operator Delimiter
+1         		NUMBR Type Literal
+AN        		Operator Delimiter
+DIFFRINT  		Not Equal Operator
+choice    		Variable Identifier
+AN        		Operator Delimiter
+2         		NUMBR Type Literal
+AN        		Operator Delimiter
+DIFFRINT  		Not Equal Operator
+choice    		Variable Identifier
+AN        		Operator Delimiter
+3         		NUMBR Type Literal
+O RLY?    		Start of If-then Delimiter
+YA RLY    		If Keyword
+VISIBLE   		Output Keyword
+"         		String Delimiter
+invalid input!		Literal   
+"         		String Delimiter
+BTW       		Single-Line Comment Delimiter
+if choice is not 1,2,3 then invalid input 		Comment Literal
+NO WAI    		Else Keyword
+VISIBLE   		Output Keyword
+"         		String Delimiter
+goodbye!  		YARN Type Literal
+"         		String Delimiter
+OIC       		End of If-then
 KTHXBYE   		End of Program
