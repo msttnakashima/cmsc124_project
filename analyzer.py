@@ -305,6 +305,7 @@ def booleanOperations(lexemesList):
     # for (nested) operations
     while (lexemesList[0][1] in boolKeywords): 
         operations.append(lexemesList.pop(0))
+
     # GET FIRST OPERAND
     # if operand is a boolean literal 
     if (lexemesList[0][1] == "TROOF Type Literal"):
@@ -382,6 +383,8 @@ def boolToLol(x):
 def comparisonOperators(lexemesList):
     global hasError 
 
+    print(lexemesList)
+
     operations = []
 
     # for (nested) operations
@@ -393,13 +396,14 @@ def comparisonOperators(lexemesList):
     # GET FIRST OPERAND
     # if operand is a literal 
     if (curr[1] in ["NUMBR Type Literal", "NUMBAR Type Literal"]):
-        firstOp = lexemesList.pop(0)[0]
+        firstOp = curr[0]
 
     # if operand is a variable name, find its value 
     elif (curr[1] == "Variable Identifier"):
         # temp = lexemesList.pop(0)
 
         # find variable name 
+        # Removing the first element of the list and assigning it to the variable temp.
         firstOp = findVar(curr[0])
 
     # boolean operations 
@@ -409,6 +413,10 @@ def comparisonOperators(lexemesList):
     # arithmetic operations
     elif (curr[1] in arithmeticKeywords):
         firstOp = arithmeticOp(lexemesList)
+
+    # arithmetic operations
+    elif (curr[1] in compareKeywords):
+        firstOp = comparisonOperators(lexemesList)
 
     # if operand is first typecasted 
     elif (curr[1] == "Typecast Keyword"):
@@ -427,13 +435,27 @@ def compareProcess(operations, x, lexemesList):
     # while there are nested operations 
     while operations:
 
+    # determine data type of operands 
+
+        op2 = getSecondOp(lexemesList)
+
+        # FOR FLOATS 
+        if (("." in str(x)) or ("." in str(op2))):
+            op1 = float(x)
+            op2 = float(op2)
+        
+        # FOR INTS 
+        else: 
+            op1 = int(x)
+            op2 = int(op2)
+
         # equal operator ("BOTH SAEM")
         if operations[0][1] == "Equal Operator":            
-            result = (x == getSecondOp(lexemesList))
+            result = (op1 == op2)
 
         # not equal operator ("DIFFRINT")
         elif operations[0][1] == "Not Equal Operator":     
-            result = (int(x) != int(getSecondOp(lexemesList)))
+            result = (op1 != op2)
         operations.pop(0)
 
     return boolToLol(result)                # convert result from python ("True"/"False") to lol ("WIN"/"FAIL")   

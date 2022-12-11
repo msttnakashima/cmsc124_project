@@ -2,42 +2,40 @@ LEXEME			CLASSIFICATION
 HAI       		Start of Program
 a         		Variable Identifier
 R         		Assignment Operation
-BOTH OF   		And Operator
-WIN       		TROOF Type Literal
+BOTH SAEM 		Equal Operator
+32        		NUMBR Type Literal
 AN        		Operator Delimiter
-FAIL      		TROOF Type Literal
+BIGGR OF  		Max Operator
+2         		NUMBR Type Literal
+AN        		Operator Delimiter
+32        		NUMBR Type Literal
 b         		Variable Identifier
 R         		Assignment Operation
-EITHER OF 		Or Operator
-FAIL      		TROOF Type Literal
+BOTH SAEM 		Equal Operator
+20.0      		NUMBAR Type Literal
 AN        		Operator Delimiter
-WIN       		TROOF Type Literal
+SMALLR OF 		Min Operator
+20.0      		NUMBAR Type Literal
+AN        		Operator Delimiter
+45        		NUMBR Type Literal
 c         		Variable Identifier
 R         		Assignment Operation
-WON OF    		Xor Operator
-WIN       		TROOF Type Literal
+DIFFRINT  		Not Equal Operator
+24.94     		NUMBAR Type Literal
 AN        		Operator Delimiter
-WIN       		TROOF Type Literal
+SMALLR OF 		Min Operator
+99        		NUMBR Type Literal
+AN        		Operator Delimiter
+24.94     		NUMBAR Type Literal
 d         		Variable Identifier
 R         		Assignment Operation
-NOT       		Boolean Not Operator
-FAIL      		TROOF Type Literal
-e         		Variable Identifier
-R         		Assignment Operation
-ALL OF    		Infinite Arity And Operator
-NOT       		Boolean Not Operator
-FAIL      		TROOF Type Literal
+DIFFRINT  		Not Equal Operator
+283       		NUMBR Type Literal
 AN        		Operator Delimiter
-BOTH OF   		And Operator
-WIN       		TROOF Type Literal
+BIGGR OF  		Max Operator
+-10       		NUMBR Type Literal
 AN        		Operator Delimiter
-WIN       		TROOF Type Literal
-AN        		Operator Delimiter
-EITHER OF 		Or Operator
-FAIL      		TROOF Type Literal
-AN        		Operator Delimiter
-WIN       		TROOF Type Literal
-MKAY      		Operation End
+283       		NUMBR Type Literal
 VISIBLE   		Output Keyword
 a         		Variable Identifier
 VISIBLE   		Output Keyword
@@ -46,6 +44,4 @@ VISIBLE   		Output Keyword
 c         		Variable Identifier
 VISIBLE   		Output Keyword
 d         		Variable Identifier
-VISIBLE   		Output Keyword
-e         		Variable Identifier
 KTHXBYE   		End of Program
