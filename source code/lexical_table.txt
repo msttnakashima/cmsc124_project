@@ -1,0 +1,42 @@
+LEXEME			CLASSIFICATION
+HAI       		Start of Program
+1.2       		NUMBAR Type Literal
+I HAS A   		Variable Declaration
+NUM       		Variable Identifier
+ITZ       		Variable Assignment
+2         		NUMBR Type Literal
+BTW       		Single-Line Comment Delimiter
+NUM = 2   		Comment Literal
+I HAS A   		Variable Declaration
+FLOT      		Variable Identifier
+ITZ       		Variable Assignment
+2.5       		NUMBAR Type Literal
+BTW       		Single-Line Comment Delimiter
+FLOT = 2.5 		Comment Literal
+I HAS A   		Variable Declaration
+NAME      		Variable Identifier
+ITZ       		Variable Assignment
+"         		String Delimiter
+erika     		YARN Type Literal
+"         		String Delimiter
+BTW       		Single-Line Comment Delimiter
+NAME = "erika" 		Comment Literal
+BTW       		Single-Line Comment Delimiter
+printing values 		Comment Literal
+VISIBLE   		Output Keyword
+NUM       		Variable Identifier
+VISIBLE   		Output Keyword
+FLOT      		Variable Identifier
+VISIBLE   		Output Keyword
+NAME      		Variable Identifier
+BTW       		Single-Line Comment Delimiter
+assignment statement: 		Comment Literal
+NUM       		Variable Identifier
+R         		Assignment Operation
+17        		NUMBR Type Literal
+VISIBLE   		Output Keyword
+"         		String Delimiter
+NUM is now 		Literal   
+"         		String Delimiter
+NUM       		Variable Identifier
+KTHXBYE   		End of Program
