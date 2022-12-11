@@ -92,17 +92,21 @@ def program():
             userInput.append(inputField.get("1.0", 'end-1c'))
             label.place_forget()
 
-    print(userInput)
+    # print(userInput)
 
 
     # write syntax
     syntaxAnalyzer = parse(lexicalTable, userInput.copy())
 
-    if isinstance(syntaxAnalyzer[0], str):  # catch if error
-        messagebox.showinfo("Error", syntaxAnalyzer[0])
-    else:               # clear table per execution
-        for syntax in syntaxAnalyzer[0]:  # insert values of lexemes
-            symbol_part.insert(parent = '', index = 'end', values = (syntax[0], syntax[1]))
+    print(syntaxAnalyzer[1])
+
+    if syntaxAnalyzer[2] == False: 
+
+        if isinstance(syntaxAnalyzer[0], str):  # catch if error
+            messagebox.showinfo("Error", syntaxAnalyzer[0])
+        else:               # clear table per execution
+            for syntax in syntaxAnalyzer[0]:  # insert values of lexemes
+                symbol_part.insert(parent = '', index = 'end', values = (syntax[0], syntax[1]))
 
     for printing in syntaxAnalyzer[1]:
         terminal_box.insert(END, printing)

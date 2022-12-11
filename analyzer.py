@@ -1,6 +1,7 @@
 from lexical import *
 import re
 
+hasError = False 
 variablesList = []
 printToTerminal = []
 
@@ -17,6 +18,8 @@ def removeComments(lexTable):
 
 # assign a value 
 def assign(lexemesList, varName):
+    global hasError
+
     lexemesList.pop(0)
 
     # SUM OF, DIFF OF, PRODUKT OF, QUOSHUNT OF, MOD OF, BIGGR OF, SMALLR OF
@@ -53,7 +56,11 @@ def assign(lexemesList, varName):
     elif (lexemesList[0][1] == "Typecast Keyword"):
         addVariable(varName, typecast(lexemesList))
 
-    return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+    else: 
+        # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keywords.')
+        hasError = True
+    return
 
 # prints the output to the terminal 
 def printOutput(lexemesList):
@@ -111,6 +118,8 @@ def printOutput(lexemesList):
 
 # function to perform arithmetic operations
 def arithmeticOperations(operations, op1, op2):
+    global hasError
+
     # determine data type of operands 
 
     # FOR FLOATS 
@@ -153,7 +162,10 @@ def arithmeticOperations(operations, op1, op2):
         return min(op1, op2)
 
     else: 
-        return ('Invalid Syntax: "' + str(operations[1]) + '" is not a valid keyword.')
+        # return ('Invalid Syntax: "' + str(operations[1]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(operations[1]) + '" is not a valid keyword.')
+        hasError = True
+        return
 
 # find operands for arithmetic operation 
 def arithmeticOp(lexemesList):
@@ -165,6 +177,8 @@ def arithmeticOp(lexemesList):
     while (lexemesList[0][1] in arithmeticKeywords): 
         operations.append(lexemesList.pop(0))
     
+    print(operations)
+
     # GET FIRST OPERAND
     # if operand is an integer/numbr, float/numbar, or boolean/troof literal
     if (lexemesList[0][1] in ["NUMBR Type Literal", "NUMBAR Type Literal", "TROOF Type Literal"]):
@@ -192,12 +206,18 @@ def arithmeticOp(lexemesList):
 
     # PERFORM OPERATIONS (including nested ones)
     while operations: 
-        result = arithmeticOperations(operations.pop(0), firstOp, getSecondOp(lexemesList))
+        curr_op = operations.pop()
+        print("curr_op: " + str(curr_op))
+        second_op = getSecondOp(lexemesList)
+        print("operands: " + str(firstOp) + " " + str(second_op) + "\n")
+        result = arithmeticOperations(curr_op, firstOp, second_op)
+        firstOp = result 
 
     return result 
 
 # get second, third, ... operand for any operation 
 def getSecondOp(lexemesList):
+    global hasError 
 
     # delimiter for operands ("AN")
     if lexemesList[0][1] != "Operator Delimiter":        
@@ -242,10 +262,15 @@ def getSecondOp(lexemesList):
         elif(lexemesList[0][1] == "Typecast Keyword"):
             return (typecast(lexemesList))
 
-    return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+    # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+    printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+    hasError = True
+    return
 
 # function to perform boolean operations
 def booleanOperations(lexemesList):
+    global hasError 
+
     operations = []
 
     # for (nested) operations
@@ -273,7 +298,10 @@ def booleanOperations(lexemesList):
         firstOp = comparisonOperators(lexemesList)
 
     else: 
-        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        hasError = True 
+        return
 
     return boolProcess(operations, firstOp, lexemesList)
 
@@ -338,6 +366,8 @@ def boolToLol(x):
 
 # function to get operands for relational operations 
 def comparisonOperators(lexemesList):
+    global hasError 
+
     operations = []
 
     # for (nested) operations
@@ -371,7 +401,10 @@ def comparisonOperators(lexemesList):
         firstOp = typecast(lexemesList)
 
     else: 
-        return ('Invalid Syntax: "' + str(curr[0]) + '" is not a valid keyword.')
+        # return ('Invalid Syntax: "' + str(curr[0]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(curr[0]) + '" is not a valid keyword.')
+        hasError = True
+        return
 
     return compareProcess(operations, firstOp, lexemesList)
 
@@ -393,6 +426,7 @@ def compareProcess(operations, x, lexemesList):
 
 # function to typecast values 
 def typecast(lexemesList):
+    global hasError 
     value = lexemesList.pop(0)              # get value 
     explicitCast = 0                        # check if it is explicitly typecasted 
 
@@ -472,8 +506,10 @@ def typecast(lexemesList):
             return(str(value))
 
     else: 
-        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
-
+        # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        hasError = True
+        return 
 
 def findVar(variableName):
     # print("variable name: " + str(variableName))
@@ -482,12 +518,14 @@ def findVar(variableName):
     print(variableName)
     for variable in variablesList:
         if (variable[0] == variableName):
-            value = variable[1]
-            break
+            # value = variable[1]
+            return variable[1]
+            # break
     # print(str(variableName) + str(value))
-    return value 
+    # return value
 
 def variableAssignment(lexemesList):
+    global hasError
     lexeme = lexemesList.pop(0)
 
     # check if next lexeme is a valid variable name (uninitialized)
@@ -532,12 +570,16 @@ def variableAssignment(lexemesList):
                 return (variableName, value)
 
             else: 
-                return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+                # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+                printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+                hasError = True 
         else: 
             return((variableName, "NULL"))
 
     else:
-        return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
+        hasError = True
 
 def addVariable(variableName, newVal):
     print("NewVal: " + str(newVal))
@@ -652,6 +694,7 @@ def foundCase(lexemesList, inputValues):
 
 # loop 
 def loop(lexemesList, inputValues):
+    global hasError 
     lexemesList.pop(0)                  # pop variable identifier 
 
     operator = lexemesList.pop(0)[0]    # pop operator 
@@ -690,7 +733,9 @@ def loop(lexemesList, inputValues):
                         addVariable(varName, temp1)
                     
                     else: 
-                        return('Invalid Syntax in loop')
+                        # return('Invalid Syntax in loop')
+                        printToTerminal.append('Invalid Syntax in loop')
+                        hasError = True 
             
             elif oper == "DIFFRINT":
                 # while ((temp1 != temp2) == False):
@@ -706,10 +751,14 @@ def loop(lexemesList, inputValues):
                         addVariable(varName, temp1)
                     
                     else: 
-                        return('Invalid Syntax in loop')
+                        # return('Invalid Syntax in loop')
+                        printToTerminal.append('Invalid Syntax in loop')
+                        hasError = True 
             
             else: 
-                return('Invalid Syntax in loop')
+                # return('Invalid Syntax in loop')
+                printToTerminal.append('Invalid Syntax in loop')
+                hasError = True 
 
         elif tilWile == "WILE":
             if oper == "BOTH SAEM":
@@ -725,7 +774,9 @@ def loop(lexemesList, inputValues):
                         addVariable(varName, temp1)
                     
                     else: 
-                        return('Invalid Syntax in loop')
+                        # return('Invalid Syntax in loop')
+                        printToTerminal.append('Invalid Syntax in loop')
+                        hasError = True 
 
             elif oper == "DIFFRINT":
                 # while ((temp1 != temp2) == False):
@@ -741,13 +792,19 @@ def loop(lexemesList, inputValues):
                         addVariable(varName, temp1)
                     
                     else: 
-                        return('Invalid Syntax in loop')
+                        # return('Invalid Syntax in loop')
+                        printToTerminal.append('Invalid Syntax in loop')
+                        hasError = True 
             
             else: 
-                return('Invalid Syntax in loop')
+                # return('Invalid Syntax in loop')
+                printToTerminal.append('Invalid Syntax in loop')
+                hasError = True 
 
         else: 
-            return('Invalid Syntax in loop')
+            # return('Invalid Syntax in loop')
+            printToTerminal.append('Invalid Syntax in loop')
+            hasError = True 
 
 def performLoop(lexemesList, inputValues):
     temp = []
@@ -764,7 +821,7 @@ def performLoop(lexemesList, inputValues):
 
 # parse lexemes 
 def parse(lexTable, userInput):
-    startFlag = False       # flag if the start of the program has been detected 
+    global hasError
     cleanLex = []
     printToTerminal.clear()
     variablesList.clear()
@@ -778,19 +835,27 @@ def parse(lexTable, userInput):
         if (cleanLex[0][1] in ["NUMBR Type Literal", "NUMBAR Type Literal"]):                           # check if "HAI" keyword contains a version number 
             cleanLex.remove(cleanLex[0])                            # remove "HAI" version from list 
     else: 
-        return('Invalid Syntax: no "HAI" keyword')
+        # return('Invalid Syntax: no "HAI" keyword')
+        printToTerminal.append('Invalid Syntax: no "HAI" keyword')
+        hasError = True
+        return [], printToTerminal, hasError
 
     # CHECK FOR "KTHXBYE"
     if (cleanLex[len(cleanLex) - 1][1] == "End of Program"):        # if the last element in the list is the "KTHXBYE" keyword (end of program) 
         cleanLex.remove(cleanLex[len(cleanLex) - 1])                # remove "KTHXBYE" from list 
     else: 
-        return('Invalid Syntax: no "KTHXBYE" keyword')
+        # return('Invalid Syntax: no "KTHXBYE" keyword')
+        printToTerminal.append('Invalid Syntax: no "KTHXBYE" keyword')
+        hasError = True
+        return [], printToTerminal, hasError
 
-    return getStatements(cleanLex, userInput), printToTerminal
+    return getStatements(cleanLex, userInput), printToTerminal, hasError
 
 def getStatements(cleanLex, inputValues):
+    global hasError 
+
     # iterate over statements in the code 
-    while cleanLex: 
+    while cleanLex and hasError == False: 
         lexeme = cleanLex.pop(0)
         token = lexeme[0]
         tokenDesc = lexeme[1]
@@ -854,7 +919,14 @@ def getStatements(cleanLex, inputValues):
                     addVariable("IT", typecast(cleanLex))
 
                 else: 
-                    return ('Invalid Syntax: "' + str(cleanLex[0][0]) + '" is not a valid keyword.')
+                    # return ('Invalid Syntax: "' + str(cleanLex[0][0]) + '" is not a valid keyword.')
+                    printToTerminal.append('Invalid Syntax: "' + str(token) + '" is not a valid keyword.')
+                    hasError = True
+
+            else: 
+                # return ('Invalid Syntax: "' + str(cleanLex[0][0]) + '" is not a valid keyword.')
+                printToTerminal.append('Invalid Syntax: "' + str(token) + '" is not a valid keyword.')
+                hasError = True
 
     # print(variablesList)
 

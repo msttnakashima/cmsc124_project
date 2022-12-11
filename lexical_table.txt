@@ -1,38 +1,72 @@
 LEXEME			CLASSIFICATION
 HAI       		Start of Program
-1.2       		NUMBAR Type Literal
 I HAS A   		Variable Declaration
-VAR       		Variable Identifier
+a         		Variable Identifier
 ITZ       		Variable Assignment
-10        		NUMBR Type Literal
-IM IN YR  		Loop Delimiter
-LOOPY     		Variable Identifier
-NERFIN    		Decrement Keyword
-YR        		Loop Operator-Variable Delimiter
-VAR       		Variable Identifier
-TIL       		Loop Until Keyword
-BOTH SAEM 		Equal Operator
-VAR       		Variable Identifier
+SUM OF    		Addition Operator
+2         		NUMBR Type Literal
 AN        		Operator Delimiter
-0         		NUMBR Type Literal
-VISIBLE   		Output Keyword
+4         		NUMBR Type Literal
+I HAS A   		Variable Declaration
+b         		Variable Identifier
+ITZ       		Variable Assignment
 DIFF OF   		Subtraction Operator
-VAR       		Variable Identifier
+4         		NUMBR Type Literal
+AN        		Operator Delimiter
+3.14      		NUMBAR Type Literal
+I HAS A   		Variable Declaration
+c         		Variable Identifier
+ITZ       		Variable Assignment
+PRODUKT OF		Multiplication Operator
+"         		String Delimiter
+2         		YARN Type Literal
+"         		String Delimiter
+AN        		Operator Delimiter
+"         		String Delimiter
+7         		YARN Type Literal
+"         		String Delimiter
+I HAS A   		Variable Declaration
+d         		Variable Identifier
+ITZ       		Variable Assignment
+QUOSHUNT OF		Quotient Operator
+5         		NUMBR Type Literal
+AN        		Operator Delimiter
+"         		String Delimiter
+12        		YARN Type Literal
+"         		String Delimiter
+I HAS A   		Variable Declaration
+e         		Variable Identifier
+ITZ       		Variable Assignment
+MOD OF    		Modulo Operator
+3         		NUMBR Type Literal
+AN        		Operator Delimiter
+"         		String Delimiter
+3.14      		YARN Type Literal
+"         		String Delimiter
+I HAS A   		Variable Declaration
+f         		Variable Identifier
+ITZ       		Variable Assignment
+SUM OF    		Addition Operator
+QUOSHUNT OF		Quotient Operator
+PRODUKT OF		Multiplication Operator
+3         		NUMBR Type Literal
+AN        		Operator Delimiter
+4         		NUMBR Type Literal
+AN        		Operator Delimiter
+2         		NUMBR Type Literal
 AN        		Operator Delimiter
 1         		NUMBR Type Literal
-IM OUTTA YR		Loop Delimiter
-LOOPY     		Variable Identifier
-OBTW      		Multi-Line Comment Delimiter
-    I HAS A temp ITZ 2		Comment Literal
-    BTW prints 2 to 9 using TIL 		Comment Literal
-    IM IN YR print10 UPPIN YR temp TIL BOTH SAEM temp AN 10		Comment Literal
-        VISIBLE temp 		Comment Literal
-    IM OUTTA YR print10		Comment Literal
-    BTW at this point, temp's value is 10, so we must reassign its initial value 		Comment Literal
-    temp R 2		Comment Literal
-    BTW prints 2 to 9 but using WILE 		Comment Literal
-    IM IN YR print10 UPPIN YR temp WILE DIFFRINT temp AN 10 		Comment Literal
-        VISIBLE temp 		Comment Literal
-    IM OUTTA YR print10		Comment Literal
-TLDR      		Multi-Line Comment Delimiter
+I HAS A   		Variable Declaration
+g         		Variable Identifier
+ITZ       		Variable Assignment
+SUM OF    		Addition Operator
+SUM OF    		Addition Operator
+SUM OF    		Addition Operator
+3         		NUMBR Type Literal
+AN        		Operator Delimiter
+4         		NUMBR Type Literal
+AN        		Operator Delimiter
+2         		NUMBR Type Literal
+AN        		Operator Delimiter
+1         		NUMBR Type Literal
 KTHXBYE   		End of Program
