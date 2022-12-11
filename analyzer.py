@@ -285,7 +285,8 @@ def booleanOperations(lexemesList):
 
         lexemesList.pop(0)    
         nested_result = []              # store result of operations
-        while lexemesList[0][1] in boolKeywords:
+        
+        while lexemesList[0][1] in boolKeywords or lexemesList[0][1] in ["Variable Identifier", "TROOF Type Literal", "Typecast Keyword"]:
 
             nested_result.append(booleanOperations(lexemesList))
             if (lexemesList[0][1] == "Operator Delimiter"): 

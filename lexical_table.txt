@@ -1,47 +1,83 @@
 LEXEME			CLASSIFICATION
 HAI       		Start of Program
-a         		Variable Identifier
-R         		Assignment Operation
-BOTH SAEM 		Equal Operator
-32        		NUMBR Type Literal
-AN        		Operator Delimiter
-BIGGR OF  		Max Operator
-2         		NUMBR Type Literal
-AN        		Operator Delimiter
-32        		NUMBR Type Literal
-b         		Variable Identifier
-R         		Assignment Operation
-BOTH SAEM 		Equal Operator
-20.0      		NUMBAR Type Literal
-AN        		Operator Delimiter
-SMALLR OF 		Min Operator
-20.0      		NUMBAR Type Literal
-AN        		Operator Delimiter
-45        		NUMBR Type Literal
-c         		Variable Identifier
-R         		Assignment Operation
-DIFFRINT  		Not Equal Operator
-24.94     		NUMBAR Type Literal
-AN        		Operator Delimiter
-SMALLR OF 		Min Operator
-99        		NUMBR Type Literal
-AN        		Operator Delimiter
-24.94     		NUMBAR Type Literal
-d         		Variable Identifier
-R         		Assignment Operation
-DIFFRINT  		Not Equal Operator
-283       		NUMBR Type Literal
-AN        		Operator Delimiter
-BIGGR OF  		Max Operator
--10       		NUMBR Type Literal
-AN        		Operator Delimiter
-283       		NUMBR Type Literal
+1.2       		NUMBAR Type Literal
+I HAS A   		Variable Declaration
+flag      		Variable Identifier
+ITZ       		Variable Assignment
+FAIL      		TROOF Type Literal
+I HAS A   		Variable Declaration
+anotherflag		Variable Identifier
+ITZ       		Variable Assignment
+WIN       		TROOF Type Literal
 VISIBLE   		Output Keyword
-a         		Variable Identifier
+flag      		Variable Identifier
+"         		String Delimiter
+ and      		Literal   
+"         		String Delimiter
+anotherflag		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+BOTH OF   		And Operator
+flag      		Variable Identifier
+AN        		Operator Delimiter
+anotherflag		Variable Identifier
 VISIBLE   		Output Keyword
-b         		Variable Identifier
+flag      		Variable Identifier
+"         		String Delimiter
+ or       		Literal   
+"         		String Delimiter
+anotherflag		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+EITHER OF 		Or Operator
+flag      		Variable Identifier
+AN        		Operator Delimiter
+anotherflag		Variable Identifier
 VISIBLE   		Output Keyword
-c         		Variable Identifier
+flag      		Variable Identifier
+"         		String Delimiter
+ xor      		Literal   
+"         		String Delimiter
+anotherflag		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+WON OF    		Xor Operator
+flag      		Variable Identifier
+AN        		Operator Delimiter
+anotherflag		Variable Identifier
 VISIBLE   		Output Keyword
-d         		Variable Identifier
+"         		String Delimiter
+not       		Literal   
+"         		String Delimiter
+flag      		Variable Identifier
+"         		String Delimiter
+ is       		Literal   
+"         		String Delimiter
+NOT       		Boolean Not Operator
+flag      		Variable Identifier
+I HAS A   		Variable Declaration
+flag3     		Variable Identifier
+ITZ       		Variable Assignment
+WIN       		TROOF Type Literal
+I HAS A   		Variable Declaration
+flag4     		Variable Identifier
+ITZ       		Variable Assignment
+WIN       		TROOF Type Literal
+I HAS A   		Variable Declaration
+flag5     		Variable Identifier
+flag5     		Variable Identifier
+R         		Assignment Operation
+ALL OF    		Infinite Arity And Operator
+flag      		Variable Identifier
+AN        		Operator Delimiter
+anotherflag		Variable Identifier
+AN        		Operator Delimiter
+flag3     		Variable Identifier
+AN        		Operator Delimiter
+flag4     		Variable Identifier
+VISIBLE   		Output Keyword
+flag5     		Variable Identifier
 KTHXBYE   		End of Program
