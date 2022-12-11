@@ -57,7 +57,8 @@ keywords = {
     'NOOB' : "Type Literal",
     "AN" : "Operator Delimiter",
     "I HAS A" : "Variable Declaration",
-    "GTFO": "Break Keyword"
+    "GTFO": "Break Keyword",
+    "MKAY": "Operation End"
 }
 
 def tokenize(string):

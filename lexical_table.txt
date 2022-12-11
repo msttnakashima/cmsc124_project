@@ -1,72 +1,51 @@
 LEXEME			CLASSIFICATION
 HAI       		Start of Program
-I HAS A   		Variable Declaration
 a         		Variable Identifier
-ITZ       		Variable Assignment
-SUM OF    		Addition Operator
-2         		NUMBR Type Literal
+R         		Assignment Operation
+BOTH OF   		And Operator
+WIN       		TROOF Type Literal
 AN        		Operator Delimiter
-4         		NUMBR Type Literal
-I HAS A   		Variable Declaration
+FAIL      		TROOF Type Literal
 b         		Variable Identifier
-ITZ       		Variable Assignment
-DIFF OF   		Subtraction Operator
-4         		NUMBR Type Literal
+R         		Assignment Operation
+EITHER OF 		Or Operator
+FAIL      		TROOF Type Literal
 AN        		Operator Delimiter
-3.14      		NUMBAR Type Literal
-I HAS A   		Variable Declaration
+WIN       		TROOF Type Literal
 c         		Variable Identifier
-ITZ       		Variable Assignment
-PRODUKT OF		Multiplication Operator
-"         		String Delimiter
-2         		YARN Type Literal
-"         		String Delimiter
+R         		Assignment Operation
+WON OF    		Xor Operator
+WIN       		TROOF Type Literal
 AN        		Operator Delimiter
-"         		String Delimiter
-7         		YARN Type Literal
-"         		String Delimiter
-I HAS A   		Variable Declaration
+WIN       		TROOF Type Literal
 d         		Variable Identifier
-ITZ       		Variable Assignment
-QUOSHUNT OF		Quotient Operator
-5         		NUMBR Type Literal
-AN        		Operator Delimiter
-"         		String Delimiter
-12        		YARN Type Literal
-"         		String Delimiter
-I HAS A   		Variable Declaration
+R         		Assignment Operation
+NOT       		Boolean Not Operator
+FAIL      		TROOF Type Literal
 e         		Variable Identifier
-ITZ       		Variable Assignment
-MOD OF    		Modulo Operator
-3         		NUMBR Type Literal
+R         		Assignment Operation
+ALL OF    		Infinite Arity And Operator
+NOT       		Boolean Not Operator
+FAIL      		TROOF Type Literal
 AN        		Operator Delimiter
-"         		String Delimiter
-3.14      		YARN Type Literal
-"         		String Delimiter
-I HAS A   		Variable Declaration
-f         		Variable Identifier
-ITZ       		Variable Assignment
-SUM OF    		Addition Operator
-QUOSHUNT OF		Quotient Operator
-PRODUKT OF		Multiplication Operator
-3         		NUMBR Type Literal
+BOTH OF   		And Operator
+WIN       		TROOF Type Literal
 AN        		Operator Delimiter
-4         		NUMBR Type Literal
+WIN       		TROOF Type Literal
 AN        		Operator Delimiter
-2         		NUMBR Type Literal
+EITHER OF 		Or Operator
+FAIL      		TROOF Type Literal
 AN        		Operator Delimiter
-1         		NUMBR Type Literal
-I HAS A   		Variable Declaration
-g         		Variable Identifier
-ITZ       		Variable Assignment
-SUM OF    		Addition Operator
-SUM OF    		Addition Operator
-SUM OF    		Addition Operator
-3         		NUMBR Type Literal
-AN        		Operator Delimiter
-4         		NUMBR Type Literal
-AN        		Operator Delimiter
-2         		NUMBR Type Literal
-AN        		Operator Delimiter
-1         		NUMBR Type Literal
+WIN       		TROOF Type Literal
+MKAY      		Operation End
+VISIBLE   		Output Keyword
+a         		Variable Identifier
+VISIBLE   		Output Keyword
+b         		Variable Identifier
+VISIBLE   		Output Keyword
+c         		Variable Identifier
+VISIBLE   		Output Keyword
+d         		Variable Identifier
+VISIBLE   		Output Keyword
+e         		Variable Identifier
 KTHXBYE   		End of Program

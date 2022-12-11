@@ -271,12 +271,40 @@ def getSecondOp(lexemesList):
 def booleanOperations(lexemesList):
     global hasError 
 
+    print(lexemesList)
+
     operations = []
+
+    # NESTED OPERATIONS 
+    # "ALL OF"
+    if lexemesList[0][1] in ["Infinite Arity And Operator", "Infinite Arity Or Operator"]: 
+        isAnd = True
+
+        if lexemesList[0][1] != "Infinite Arity And Operator":
+            isAnd = False
+
+        lexemesList.pop(0)    
+        nested_result = []              # store result of operations
+        while lexemesList[0][1] in boolKeywords:
+
+            nested_result.append(booleanOperations(lexemesList))
+            if (lexemesList[0][1] == "Operator Delimiter"): 
+                lexemesList.pop(0)
+
+        x = lolToBool(nested_result[0])
+
+        # get "and" / "or" of each nested boolean operation
+        for i in range(1, len(nested_result)):
+            if (isAnd):
+                x = x and lolToBool(nested_result[i])
+            else: 
+                x = x or lolToBool(nested_result[i])
+
+        return boolToLol(x)
 
     # for (nested) operations
     while (lexemesList[0][1] in boolKeywords): 
         operations.append(lexemesList.pop(0))
-    
     # GET FIRST OPERAND
     # if operand is a boolean literal 
     if (lexemesList[0][1] == "TROOF Type Literal"):
@@ -297,6 +325,10 @@ def booleanOperations(lexemesList):
     elif (lexemesList[0][1] in compareKeywords):
         firstOp = comparisonOperators(lexemesList)
 
+    # check for "MKAY" keyword
+    elif (lexemesList[0][1] == "Operation End"):
+        lexemesList.pop(0)
+
     else: 
         # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
         printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
@@ -308,28 +340,14 @@ def booleanOperations(lexemesList):
 # function to perform the boolean operation 
 def boolProcess (operations, x, lexemesList):
     x = lolToBool(x)                    # convert from "WIN"/"FAIL" (lol) to "True"/"False" (python)
+    while operations:                                   # while there are nested operations 
+        currOperation = operations.pop(0)                # get current operation to be performed 
 
-    # NESTED OPERATIONS
-    # "ALL OF"
-    if operations[0][1] == "Infinite Arity And Operator":         
-        while lexemesList[0][1] == "Operator Delimiter":
-            y = getSecondOp(lexemesList)
-            x = x and lolToBool(y)
-            addVariable("IT", x)
-        return boolToLol(x)
+        # not operator ("NOT")   
+        if currOperation[1] == "Boolean Not Operator":
+            x = not x
 
-    # "ANY OF"
-    elif operations[0][1] == "Infinite Arity Or Operator":        
-        while lexemesList[0][1] == "Operator Delimiter":
-            y = getSecondOp(lexemesList)
-            x = x or lolToBool(y)
-            addVariable("IT", x)
-        return boolToLol(x)
-
-    # if it is not a nested operation / reached the root of the nested operation
-    else: 
-        while operations:                                   # while there are nested operations 
-            currOperation = operations.pop(0)               # get current operation to be performed 
+        else: 
             y = getSecondOp(lexemesList)                    # get second operand 
 
             # and operator ("BOTH OF")
@@ -344,11 +362,7 @@ def boolProcess (operations, x, lexemesList):
             elif currOperation[1] == "Xor Operator":
                 x = x ^ lolToBool(y)
 
-            # not operator ("NOT")   
-            elif currOperation[1] == "Boolean Not Operator":
-                x = not x
-
-        return boolToLol(x)             # convert from "True"/"False" (python) to "WIN"/"FAIL" (lol)
+    return boolToLol(x)             # convert from "True"/"False" (python) to "WIN"/"FAIL" (lol)
 
 # function to convert boolean literals from lolcode ("WIN"/"FAIL") to python ("True"/"False")
 def lolToBool(x):
@@ -410,7 +424,7 @@ def comparisonOperators(lexemesList):
 
 # function to perform relational operation
 def compareProcess(operations, x, lexemesList):
-    # while there arenested operations 
+    # while there are nested operations 
     while operations:
 
         # equal operator ("BOTH SAEM")
@@ -514,8 +528,8 @@ def typecast(lexemesList):
 def findVar(variableName):
     # print("variable name: " + str(variableName))
     # find variable name 
-    print(variablesList)
-    print(variableName)
+    # print(variablesList)
+    # print(variableName)
     for variable in variablesList:
         if (variable[0] == variableName):
             # value = variable[1]
@@ -582,7 +596,7 @@ def variableAssignment(lexemesList):
         hasError = True
 
 def addVariable(variableName, newVal):
-    print("NewVal: " + str(newVal))
+    # print("NewVal: " + str(newVal))
     temp = 0
     for i in range(len(variablesList)):
         if (variablesList[i][0] == variableName):
@@ -598,10 +612,10 @@ def ifThenState(lexemesList, inputValues):
     # lexemesList.pop(0)
 
     while lexemesList: 
-        print(lexemesList)
+        # print(lexemesList)
         if lexemesList[0][1] == "If Keyword":               # YA RLY
             lexemesList.pop(0)
-            print("IT value: " + str(findVar("IT")))
+            # print("IT value: " + str(findVar("IT")))
             if (findVar("IT") == "WIN"):
                 foundCond(lexemesList, inputValues)
                 isMatch = True 
@@ -643,7 +657,7 @@ def switchCase(lexemesList, inputValues):
     isMatch = False 
 
     # print(lexemesList)
-    print("In switchCase with token " + str(lexemesList[0][0]))
+    # print("In switchCase with token " + str(lexemesList[0][0]))
 
     while lexemesList[0][1] != "End of If-then":            # OIC keyword
         if (lexemesList[0][1] == "Case Delimiter"):         # OMG keyword 
@@ -886,13 +900,17 @@ def getStatements(cleanLex, inputValues):
         elif (tokenDesc == "Start of Switch-case"):         # WTF?
             switchCase(cleanLex, inputValues)
 
-        # GTFO
-        elif (tokenDesc == "Break Keyword"):                              # GTFO
-            break
-    
         # LOOP 
         elif (tokenDesc == "Loop Delimiter"):
             loop(cleanLex, inputValues)
+
+        # GTFO
+        elif (tokenDesc == "Break Keyword"):                              # GTFO
+            break
+
+        # check for "MKAY" keyword
+        elif (tokenDesc == "Operation End"):
+            continue
 
         else: 
             if (cleanLex):
