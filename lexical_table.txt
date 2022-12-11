@@ -4,11 +4,11 @@ HAI       		Start of Program
 I HAS A   		Variable Declaration
 flag      		Variable Identifier
 ITZ       		Variable Assignment
-FAIL      		TROOF Type Literal
+WIN       		TROOF Type Literal
 I HAS A   		Variable Declaration
 anotherflag		Variable Identifier
 ITZ       		Variable Assignment
-WIN       		TROOF Type Literal
+FAIL      		TROOF Type Literal
 VISIBLE   		Output Keyword
 flag      		Variable Identifier
 "         		String Delimiter

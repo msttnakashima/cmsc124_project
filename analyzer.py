@@ -58,7 +58,7 @@ def assign(lexemesList, varName):
 
     else: 
         # return ('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
-        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keywords.')
+        printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
         hasError = True
     return
 
@@ -122,15 +122,20 @@ def arithmeticOperations(operations, op1, op2):
 
     # determine data type of operands 
 
-    # FOR FLOATS 
-    if (("." in str(op1)) or ("." in str(op2))):
-        op1 = float(op1)
-        op2 = float(op2)
-    
-    # FOR INTS 
-    else: 
-        op1 = int(op1)
-        op2 = int(op2)
+    try: 
+        # FOR FLOATS 
+        if (("." in str(op1)) or ("." in str(op2))):
+            op1 = float(op1)
+            op2 = float(op2)
+        
+        # FOR INTS 
+        else: 
+            op1 = int(op1)
+            op2 = int(op2)
+    except: 
+        printToTerminal.append('Cannot typecast ' + str(op1) + ' or ' + str(op2) + ' into NUMBR/NUMBAR')
+        hasError = True
+        return
 
     # determine operators
     if (operations[1] == "Addition Operator"):
@@ -336,6 +341,12 @@ def booleanOperations(lexemesList):
         printToTerminal.append('Invalid Syntax: "' + str(lexemesList[0][0]) + '" is not a valid keyword.')
         hasError = True 
         return
+
+    if firstOp in ["", "NULL", 0]:
+        firstOp = "FAIL"
+
+    elif firstOp not in ["WIN", "FAIL"]:
+        firstOp = "WIN"
 
     return boolProcess(operations, firstOp, lexemesList)
 
