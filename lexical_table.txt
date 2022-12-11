@@ -1,83 +1,26 @@
 LEXEME			CLASSIFICATION
 HAI       		Start of Program
-1.2       		NUMBAR Type Literal
 I HAS A   		Variable Declaration
-flag      		Variable Identifier
+var1      		Variable Identifier
 ITZ       		Variable Assignment
-WIN       		TROOF Type Literal
+12        		NUMBR Type Literal
+MAEK      		Typecast Keyword
+var1      		Variable Identifier
+A         		Typecast Keyword
+NUMBAR    		NUMBAR Type Literal
+MAEK      		Typecast Keyword
+var1      		Variable Identifier
+YARN      		YARN Type Literal
 I HAS A   		Variable Declaration
-anotherflag		Variable Identifier
+number    		Variable Identifier
 ITZ       		Variable Assignment
-FAIL      		TROOF Type Literal
-VISIBLE   		Output Keyword
-flag      		Variable Identifier
-"         		String Delimiter
- and      		Literal   
-"         		String Delimiter
-anotherflag		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-BOTH OF   		And Operator
-flag      		Variable Identifier
-AN        		Operator Delimiter
-anotherflag		Variable Identifier
-VISIBLE   		Output Keyword
-flag      		Variable Identifier
-"         		String Delimiter
- or       		Literal   
-"         		String Delimiter
-anotherflag		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-EITHER OF 		Or Operator
-flag      		Variable Identifier
-AN        		Operator Delimiter
-anotherflag		Variable Identifier
-VISIBLE   		Output Keyword
-flag      		Variable Identifier
-"         		String Delimiter
- xor      		Literal   
-"         		String Delimiter
-anotherflag		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-WON OF    		Xor Operator
-flag      		Variable Identifier
-AN        		Operator Delimiter
-anotherflag		Variable Identifier
-VISIBLE   		Output Keyword
-"         		String Delimiter
-not       		Literal   
-"         		String Delimiter
-flag      		Variable Identifier
-"         		String Delimiter
- is       		Literal   
-"         		String Delimiter
-NOT       		Boolean Not Operator
-flag      		Variable Identifier
-I HAS A   		Variable Declaration
-flag3     		Variable Identifier
-ITZ       		Variable Assignment
-WIN       		TROOF Type Literal
-I HAS A   		Variable Declaration
-flag4     		Variable Identifier
-ITZ       		Variable Assignment
-WIN       		TROOF Type Literal
-I HAS A   		Variable Declaration
-flag5     		Variable Identifier
-flag5     		Variable Identifier
+17        		NUMBR Type Literal
+number    		Variable Identifier
+IS NOW A  		Typecast Keyword
+NUMBAR    		NUMBAR Type Literal
+number    		Variable Identifier
 R         		Assignment Operation
-ALL OF    		Infinite Arity And Operator
-flag      		Variable Identifier
-AN        		Operator Delimiter
-anotherflag		Variable Identifier
-AN        		Operator Delimiter
-flag3     		Variable Identifier
-AN        		Operator Delimiter
-flag4     		Variable Identifier
-VISIBLE   		Output Keyword
-flag5     		Variable Identifier
+MAEK      		Typecast Keyword
+number    		Variable Identifier
+YARN      		YARN Type Literal
 KTHXBYE   		End of Program

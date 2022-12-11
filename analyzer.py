@@ -291,9 +291,20 @@ def booleanOperations(lexemesList):
         lexemesList.pop(0)    
         nested_result = []              # store result of operations
         
-        while lexemesList[0][1] in boolKeywords or lexemesList[0][1] in ["Variable Identifier", "TROOF Type Literal", "Typecast Keyword"]:
+        while lexemesList[0][1] in boolKeywords or lexemesList[0][1] in ["Variable Identifier", "TROOF Type Literal", "Typecast Keyword"] or lexemesList[0][1] in arithmeticKeywords or lexemesList[0][1] in compareKeywords:
 
-            nested_result.append(booleanOperations(lexemesList))
+            if (lexemesList[0][1] == "Variable Identifier"):
+                nested_result.append(findVar(lexemesList.pop(0)[0]))
+            
+            elif (lexemesList[0][1] in arithmeticKeywords):
+                nested_result.append(arithmeticOp(lexemesList))
+
+            elif (lexemesList[0][1] in compareKeywords):
+                nested_result.append(comparisonOperators(lexemesList))
+
+            elif (lexemesList[0][1] in boolKeywords): 
+                nested_result.append(booleanOperations(lexemesList))
+
             if (lexemesList[0][1] == "Operator Delimiter"): 
                 lexemesList.pop(0)
 
@@ -571,6 +582,10 @@ def findVar(variableName):
             # break
     # print(str(variableName) + str(value))
     # return value
+
+    printToTerminal.append("'" + str(variableName) + "' variable not found.")
+    hasError = True
+    return 
 
 def variableAssignment(lexemesList):
     global hasError
@@ -867,9 +882,38 @@ def performLoop(lexemesList, inputValues):
     
     return temp
 
+def concat(lexemesList):
+    # lexemesList.pop(0)    
+    strings = []              # store result of operations
+    
+    print(lexemesList)
+    while lexemesList[0][1] in literalKeywords or lexemesList[0][1] in ["Literal", "Variable Identifier", "String Delimiter"]:
+        if (lexemesList[0][1] == "Variable Identifier"):
+            strings.append(str(findVar(lexemesList.pop(0)[0])))
+        elif (lexemesList[0][1] == "String Delimiter"):
+            lexemesList.pop(0)
+        else: 
+            strings.append(str(lexemesList.pop(0)[0]))
+
+        if (lexemesList):
+            if (lexemesList[0][1] == "Operator Delimiter"): 
+                lexemesList.pop(0)
+        else: 
+            break
+
+    print(strings)
+    x = strings[0]
+
+    # get "and" / "or" of each nested boolean operation
+    for i in range(1, len(strings)):
+        x = x + strings[i]
+
+    return x
+
 # parse lexemes 
 def parse(lexTable, userInput):
     global hasError
+    hasError = False
     cleanLex = []
     printToTerminal.clear()
     variablesList.clear()
@@ -913,6 +957,9 @@ def getStatements(cleanLex, inputValues):
         # VARIABLES ("I HAS A")
         if (tokenDesc == "Variable Declaration"):           # I HAS A
             variablesList.append(variableAssignment(cleanLex))
+
+        elif (tokenDesc == "Concatenation Keyword"):
+            addVariable("IT", concat(cleanLex))
 
         # USER INPUT ("GIMMEH")
         elif (tokenDesc == "Input Keyword"):
